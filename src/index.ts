@@ -16,6 +16,7 @@ import {
 	searchExistingGraphsFetchTool,
 	generateOverlapGraphFromTextsTool,
 	generateDifferenceGraphFromTextsTool,
+	generateGoogleSearchResultsGraphTool,
 } from "./tools/index.js";
 import { aboutResource } from "./resources/about.js";
 import * as dotenv from "dotenv";
@@ -100,6 +101,12 @@ export default function createServer({
 		generateDifferenceGraphFromTextsTool.name,
 		generateDifferenceGraphFromTextsTool.definition,
 		generateDifferenceGraphFromTextsTool.handler
+	);
+
+	server.registerTool(
+		generateGoogleSearchResultsGraphTool.name,
+		generateGoogleSearchResultsGraphTool.definition,
+		generateGoogleSearchResultsGraphTool.handler
 	);
 
 	server.registerTool(

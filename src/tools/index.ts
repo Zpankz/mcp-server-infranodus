@@ -11,3 +11,4 @@ export { searchExistingGraphsTool } from "./searchGraphs.js";
 export { searchExistingGraphsFetchTool } from "./searchGraphsFetch.js";
 export { generateOverlapGraphFromTextsTool } from "./generateOverlapGraphFromTexts.js";
 export { generateDifferenceGraphFromTextsTool } from "./generateDifferenceGraphFromTexts.js";
+export { generateGoogleSearchResultsGraphTool } from "./generateGoogleSearchResultsGraph.js";

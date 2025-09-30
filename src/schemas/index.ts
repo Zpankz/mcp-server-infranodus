@@ -371,3 +371,30 @@ export const GenerateDifferenceGraphFromTextsSchema = z.object({
 			"Include nodes and edges in response (add only if explicitly needed, not recommended for longer texts)"
 		),
 });
+
+export const GenerateGoogleSearchResultsGraphSchema = z.object({
+	queries: z
+		.array(z.string())
+		.min(1, "Queries are required for analysis")
+		.describe(
+			"Queries that you'd like to get Google search results for, can be comma-separated for multiple queries"
+		),
+	includeSearchResultsOnly: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Only include search results in the response (do not include the knowledge graph and keywords)"
+		),
+	showGraphOnly: z
+		.boolean()
+		.default(true)
+		.describe(
+			"Only include the graph structure and keywords in the response (do not include the search results)"
+		),
+	showExtendedGraphInfo: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include extended graph information in the response (add only if explicitly needed)"
+		),
+});

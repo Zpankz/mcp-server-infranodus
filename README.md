@@ -88,6 +88,11 @@ InfraNodus MCP Server enables LLM workflows and AI assistants to analyze text us
 - Create knowledge graphs from two or more text and find what's not present in the first graph that's present in the others
 - Use it to find how one text can be enriched with the others
 
+12 **generate_google_search_graph**
+
+- Generate a graph with keywords and topics for Google search results for a certain query
+- Use it to understand the current informational supply
+
 12. **search**
 
 - Search through existing InfraNodus graphs
