@@ -30,8 +30,9 @@ Available Tools:
 10. generate_overlap_graph - Create knowledge graphs from two or more texts and find the overlap (similarities) between them
 11. generate_difference_graph - Create knowledge graphs from two or more text and find what's not present in the first graph that's present in the others
 12. generate_google_search_graph - Generate a Google search results graph from search queries
-13. search - Search through existing InfraNodus graphs
-14. fetch - Fetch a specific search result for a graph
+13. generate_search_queries_graph - Generate a graph of search requests related to search queries provided
+14. search - Search through existing InfraNodus graphs
+15. fetch - Fetch a specific search result for a graph
 
 Key Features:
 - Topic modeling and clustering

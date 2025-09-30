@@ -398,3 +398,36 @@ export const GenerateGoogleSearchResultsGraphSchema = z.object({
 			"Include extended graph information in the response (add only if explicitly needed)"
 		),
 });
+
+export const GenerateGoogleSearchQueriesGraphSchema = z.object({
+	queries: z
+		.array(z.string())
+		.min(1, "Queries are required for analysis")
+		.describe(
+			"Queries that you'd like to get Google related queries for, can be comma-separated for multiple queries"
+		),
+	includeSearchQueriesOnly: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Only include search queries in the response (do not include the knowledge graph and keywords)"
+		),
+	keywordsSource: z
+		.enum(["related", "adwords"])
+		.default("related")
+		.describe(
+			"Source of keywords to use for the graph: related (Google suggestions) or adwords (Google Ads suggestions - broader range)"
+		),
+	showGraphOnly: z
+		.boolean()
+		.default(true)
+		.describe(
+			"Only include the graph structure and keywords in the response (do not include the search queries)"
+		),
+	showExtendedGraphInfo: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include extended graph information in the response (add only if explicitly needed)"
+		),
+});
