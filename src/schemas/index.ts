@@ -324,3 +324,48 @@ export const GenerateOverlapGraphFromTextsSchema = z.object({
 			"Include nodes and edges in response (add only if explicitly needed, not recommended for longer texts)"
 		),
 });
+
+export const GenerateDifferenceGraphFromTextsSchema = z.object({
+	contexts: z
+		.array(
+			z.object({
+				text: z
+					.string()
+					.min(1, "Text is required for analysis")
+					.describe(
+						"Text content - First element is the target text to analyze for missing parts, subsequent elements are reference texts to identify what's missing"
+					),
+				modifyAnalyzedText: z
+					.enum(["none", "detectEntities", "extractEntitiesOnly"])
+					.default("none")
+					.describe(
+						"Entity detection: none (normal), detectEntities (detect entities and keywords), extractEntitiesOnly (only entities)"
+					),
+			})
+		)
+		.min(
+			2,
+			"At least two contexts are required - one target text and one reference text"
+		)
+		.describe(
+			"Array of texts where the FIRST text is analyzed for missing parts compared to the REMAINING reference texts. Example: [targetText, referenceText1, referenceText2, ...]"
+		),
+	includeStatements: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include processed statements in response (add only if explicitly needed)"
+		),
+	includeGraph: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include full graph structure in response (add only if explicitly needed)"
+		),
+	addNodesAndEdges: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include nodes and edges in response (add only if explicitly needed, not recommended for longer texts)"
+		),
+});

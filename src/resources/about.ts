@@ -28,8 +28,9 @@ Available Tools:
 8. generate_text_overview - Generate a topical overview of a text and provide insights for LLMs to generate better responses
 9. create_knowledge_graph - Create a knowledge graph in InfraNodus from text and provide a link to it
 10. generate_overlap_graph - Create knowledge graphs from two or more texts and find the overlap (similarities) between them
-11. search - Search through existing InfraNodus graphs
-12. fetch - Fetch a specific search result for a graph
+11. generate_difference_graph - Create knowledge graphs from two or more text and find what's not present in the first graph that's present in the others
+12. search - Search through existing InfraNodus graphs
+13. fetch - Fetch a specific search result for a graph
 
 Key Features:
 - Topic modeling and clustering

@@ -83,13 +83,18 @@ InfraNodus MCP Server enables LLM workflows and AI assistants to analyze text us
 - Create knowledge graphs from two or more texts and find the overlap (similarities) between them
 - Use it to find similar topics and keywords across different texts
 
-11. **search**
+11. **generate_difference_graph**
+
+- Create knowledge graphs from two or more text and find what's not present in the first graph that's present in the others
+- Use it to find how one text can be enriched with the others
+
+12. **search**
 
 - Search through existing InfraNodus graphs
 - Also use it to search through the public graphs of a specific user
 - Compatible with ChatGPT Deep Research mode via Developer Mode > Connectors
 
-12. **fetch**
+13. **fetch**
 
 - Fetch a specific search result for a graph
 - Can be used in ChatGPT Deep Research mode via Developer Mode > Connectors
