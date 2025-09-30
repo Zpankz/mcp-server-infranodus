@@ -431,3 +431,24 @@ export const GenerateGoogleSearchQueriesGraphSchema = z.object({
 			"Include extended graph information in the response (add only if explicitly needed)"
 		),
 });
+
+export const GenerateGoogleResultsVsQueriesGraphSchema = z.object({
+	queries: z
+		.array(z.string())
+		.min(1, "Queries are required for analysis")
+		.describe(
+			"Queries for which you'd like to find the difference between what people find and what people are looking for"
+		),
+	showGraphOnly: z
+		.boolean()
+		.default(true)
+		.describe(
+			"Only include the graph structure and keywords in the response (do not include the search results)"
+		),
+	showExtendedGraphInfo: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include extended graph information in the response (add only if explicitly needed)"
+		),
+});

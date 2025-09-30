@@ -13,3 +13,4 @@ export { generateOverlapGraphFromTextsTool } from "./generateOverlapGraphFromTex
 export { generateDifferenceGraphFromTextsTool } from "./generateDifferenceGraphFromTexts.js";
 export { generateGoogleSearchResultsGraphTool } from "./generateGoogleSearchResultsGraph.js";
 export { generateGoogleSearchQueriesGraphTool } from "./generateGoogleSearchQueriesGraph.js";
+export { generateGoogleResultsVsQueriesGraphTool } from "./generateGoogleResultsVsQueriesGraph.js";

@@ -18,6 +18,7 @@ import {
 	generateDifferenceGraphFromTextsTool,
 	generateGoogleSearchResultsGraphTool,
 	generateGoogleSearchQueriesGraphTool,
+	generateGoogleResultsVsQueriesGraphTool,
 } from "./tools/index.js";
 import { aboutResource } from "./resources/about.js";
 import * as dotenv from "dotenv";
@@ -114,6 +115,12 @@ export default function createServer({
 		generateGoogleSearchQueriesGraphTool.name,
 		generateGoogleSearchQueriesGraphTool.definition,
 		generateGoogleSearchQueriesGraphTool.handler
+	);
+
+	server.registerTool(
+		generateGoogleResultsVsQueriesGraphTool.name,
+		generateGoogleResultsVsQueriesGraphTool.definition,
+		generateGoogleResultsVsQueriesGraphTool.handler
 	);
 
 	server.registerTool(

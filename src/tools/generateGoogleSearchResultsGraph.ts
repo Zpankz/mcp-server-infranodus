@@ -35,6 +35,7 @@ export const generateGoogleSearchResultsGraphTool = {
 			const response = await makeInfraNodusRequest(endpoint, {
 				searchQuery: params.queries.join(","),
 				doNotAddGraph: params.includeSearchResultsOnly ? "true" : "false",
+				aiTopics: "true",
 			});
 
 			if (response.error) {

@@ -98,13 +98,18 @@ InfraNodus MCP Server enables LLM workflows and AI assistants to analyze text us
 - Generate a graph from the search queries suggested by Google for a certain query
 - Use it to understand the current informational demand (what people are looking for)
 
-14. **search**
+14. **generate_search_results_vs_queries_graph**
+
+- Generate a graph of keyword combinations and topics people tend to search for that do not readily appear in the search results for the same queries
+- Use it to understand what people search for but don't yet find
+
+15. **search**
 
 - Search through existing InfraNodus graphs
 - Also use it to search through the public graphs of a specific user
 - Compatible with ChatGPT Deep Research mode via Developer Mode > Connectors
 
-15. **fetch**
+16. **fetch**
 
 - Fetch a specific search result for a graph
 - Can be used in ChatGPT Deep Research mode via Developer Mode > Connectors

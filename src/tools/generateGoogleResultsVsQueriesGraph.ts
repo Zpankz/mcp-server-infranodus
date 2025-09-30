@@ -1,21 +1,21 @@
 import { z } from "zod";
-import { GenerateGoogleSearchQueriesGraphSchema } from "../schemas/index.js";
+import { GenerateGoogleResultsVsQueriesGraphSchema } from "../schemas/index.js";
 import { makeInfraNodusRequest } from "../api/client.js";
 import { transformToStructuredOutput } from "../utils/transformers.js";
 
-export const generateGoogleSearchQueriesGraphTool = {
-	name: "generate_search_queries_graph",
+export const generateGoogleResultsVsQueriesGraphTool = {
+	name: "generate_search_results_vs_queries_graph",
 	definition: {
-		title: "Generate a Google Search Intent Graph",
+		title: "Generate a Graph of Search Results vs Search Queries",
 		description:
-			"Generate a graph of search requests related to search queries provided",
-		inputSchema: GenerateGoogleSearchQueriesGraphSchema.shape,
+			"Find the combinations of keywords and topics people search for that don't appear in the search results for the same queries",
+		inputSchema: GenerateGoogleResultsVsQueriesGraphSchema.shape,
 	},
 	handler: async (
-		params: z.infer<typeof GenerateGoogleSearchQueriesGraphSchema>
+		params: z.infer<typeof GenerateGoogleResultsVsQueriesGraphSchema>
 	) => {
 		try {
-			const includeGraph = params.includeSearchQueriesOnly ? false : true;
+			const includeGraph = params.showExtendedGraphInfo ? true : false;
 			const includeStatements = params.showGraphOnly ? false : true;
 
 			// First generate the graph with focus on insights
@@ -24,20 +24,17 @@ export const generateGoogleSearchQueriesGraphTool = {
 				addStats: "true",
 				includeGraphSummary: "true",
 				extendedGraphSummary: "true",
-				includeGraph: includeGraph ? "false" : "true",
+				includeGraph: includeGraph ? "true" : "false",
 				includeStatements: includeStatements ? "true" : "false",
 				compactGraph: "true",
 				compactStatements: "true",
 				aiTopics: "true",
 			});
 
-			const endpoint = `/import/googleSearchIntentGraph?${queryParams.toString()}`;
+			const endpoint = `/import/googleSearchVsIntentGraph?${queryParams.toString()}`;
 
 			const response = await makeInfraNodusRequest(endpoint, {
 				searchQuery: params.queries.join(","),
-				doNotAddGraph: includeGraph ? "false" : "true",
-				keywordsSource:
-					params.keywordsSource == "adwords" ? "adwords" : "related",
 				aiTopics: "true",
 			});
 
