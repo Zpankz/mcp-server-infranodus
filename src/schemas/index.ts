@@ -286,3 +286,41 @@ export const GenerateGeneralGraphSchema = z.object({
 			"Entity detection: none (normal), detectEntities (detect entities and keywords), extractEntitiesOnly (only entities)"
 		),
 });
+
+export const GenerateOverlapGraphFromTextsSchema = z.object({
+	contexts: z
+		.array(
+			z.object({
+				text: z
+					.string()
+					.min(1, "Text is required for analysis")
+					.describe("Text that you'd like to analyze"),
+				modifyAnalyzedText: z
+					.enum(["none", "detectEntities", "extractEntitiesOnly"])
+					.default("none")
+					.describe(
+						"Entity detection: none (normal), detectEntities (detect entities and keywords), extractEntitiesOnly (only entities)"
+					),
+			})
+		)
+		.min(1, "At least one context is required")
+		.describe("Array of the texts to analyze and find overlaps for"),
+	includeStatements: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include processed statements in response (add only if explicitly needed)"
+		),
+	includeGraph: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include full graph structure in response (add only if explicitly needed)"
+		),
+	addNodesAndEdges: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include nodes and edges in response (add only if explicitly needed, not recommended for longer texts)"
+		),
+});

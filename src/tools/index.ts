@@ -9,3 +9,4 @@ export { generateResponsesFromGraphTool } from "./generateResponsesFromGraph.js"
 export { generateTextOverviewTool } from "./generateTextOverview.js";
 export { searchExistingGraphsTool } from "./searchGraphs.js";
 export { searchExistingGraphsFetchTool } from "./searchGraphsFetch.js";
+export { generateOverlapGraphFromTextsTool } from "./generateOverlapGraphFromTexts.js";
