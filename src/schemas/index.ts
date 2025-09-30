@@ -303,8 +303,10 @@ export const GenerateOverlapGraphFromTextsSchema = z.object({
 					),
 			})
 		)
-		.min(1, "At least one context is required")
-		.describe("Array of the texts to analyze and find overlaps for"),
+		.min(2, "At least two contexts are required")
+		.describe(
+			"Array of the texts to analyze and find overlaps for. Example: [text1, text2, ...]"
+		),
 	includeStatements: z
 		.boolean()
 		.default(false)
