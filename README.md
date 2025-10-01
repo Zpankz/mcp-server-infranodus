@@ -127,12 +127,55 @@ _More capabilites coming soon!_
 
 ## Installation
 
-### Prerequisites
+The easiest and the fastest way to launch the InfraNodus MCP server is to use the external provider, Smithery, and simply copy and paste the settings to the tool of your choice (e.g. Claude, Cursor, or ChatGPT).
+
+You can also install the server locally, so you have more control over it. In this case, you can also edit the source files and even create your tools based on the [InfraNodus API](https://infranodus.com/api).
+
+Below we describe the two different ways to set up your InfraNodus MCP server.
+
+### Easiest Setup: Smithery InfraNodus MCP Server (via HTTP/SSE)
+
+0. **Prerequisites**
+
+- Create an account on [Smithery.Ai](https://smithery.ai/) (it's free and you can use your Google or GitHub login)
+- Create an account on [InfraNodus](https://infranodus.com) if you don't have it already and get your [InfraNodus API Key](https://infranodus.com/api-access). We offer 14-day free trials.
+- Then go to the [Smithery InfraNodus Server](https://smithery.ai/server/@infranodus/mcp-server-infranodus), click "Configure" at the top right, and add your InfraNodus API key there.
+
+1. **Get the URL of the InfraNodus Server from Smithery**
+
+- Go to [Smithery InfraNodus Server](https://smithery.ai/server/@infranodus/mcp-server-infranodus) and get the URL link from Smithery [https://server.smithery.ai/@infranodus/mcp-server-infranodus/mcp](https://server.smithery.ai/@infranodus/mcp-server-infranodus/mcp) for the server or use one of their automatic setup tools for Claude or Cursor.
+
+2. **Add to to the Client Tool Where You Want to Use InfraNodus**
+
+- Once you add the URL above to your tool, it will automatically prompt you to authenticate using Smithery (via Oauth) in order to be able to access the InfraNodus MCP hosted on it.
+
+- If your client does not support Oauth, you can click the link \*Get the URL with keys instead\*\* which you can use to authenticate without Oauth.
+
+- In the end, either Smithery or you yourself will add something like this in your MCP configuration file:
+
+```json
+// e.g. for Cursor
+"mcpServers": {
+    "mcp-server-infranodus": {
+      "type": "http",
+      "url": "https://server.smithery.ai/@infranodus/mcp-server-infranodus/mcp?api_key=your_infranodus_api_key",
+      "headers": {}
+    }
+  }
+```
+
+4. **Use InfraNodus Tools in Your Calls**
+
+- To use InfraNodus, see the tools available and simply call them through the chat interface (e.g. "show me the graphs where I talk about this topic" or "get the content gaps from the document I uploaded")
+
+- If your client is not using InfraNodus for some actions, add the instruction to use InfraNodus explicitly.
+
+### Manual Setup: Local Server
+
+0. **Prerequisites**
 
 - Node.js 18+ installed
 - InfraNodus API key (get yours at [https://infranodus.com/api-access](https://infranodus.com/api-access))
-
-### Setup Steps
 
 1. **Clone and build the server:**
 
@@ -208,6 +251,8 @@ _More capabilites coming soon!_
    ```
 
 3. Restart Claude Desktop.
+
+### Cursor Configuration
 
 ### Other MCP-Compatible Applications
 
