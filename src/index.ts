@@ -14,6 +14,11 @@ import {
 	generateTextOverviewTool,
 	searchExistingGraphsTool,
 	searchExistingGraphsFetchTool,
+	generateOverlapGraphFromTextsTool,
+	generateDifferenceGraphFromTextsTool,
+	generateGoogleSearchResultsGraphTool,
+	generateGoogleSearchQueriesGraphTool,
+	generateGoogleResultsVsQueriesGraphTool,
 } from "./tools/index.js";
 import { aboutResource } from "./resources/about.js";
 import * as dotenv from "dotenv";
@@ -86,6 +91,36 @@ export default function createServer({
 		generateTextOverviewTool.name,
 		generateTextOverviewTool.definition,
 		generateTextOverviewTool.handler
+	);
+
+	server.registerTool(
+		generateOverlapGraphFromTextsTool.name,
+		generateOverlapGraphFromTextsTool.definition,
+		generateOverlapGraphFromTextsTool.handler
+	);
+
+	server.registerTool(
+		generateDifferenceGraphFromTextsTool.name,
+		generateDifferenceGraphFromTextsTool.definition,
+		generateDifferenceGraphFromTextsTool.handler
+	);
+
+	server.registerTool(
+		generateGoogleSearchResultsGraphTool.name,
+		generateGoogleSearchResultsGraphTool.definition,
+		generateGoogleSearchResultsGraphTool.handler
+	);
+
+	server.registerTool(
+		generateGoogleSearchQueriesGraphTool.name,
+		generateGoogleSearchQueriesGraphTool.definition,
+		generateGoogleSearchQueriesGraphTool.handler
+	);
+
+	server.registerTool(
+		generateGoogleResultsVsQueriesGraphTool.name,
+		generateGoogleResultsVsQueriesGraphTool.definition,
+		generateGoogleResultsVsQueriesGraphTool.handler
 	);
 
 	server.registerTool(

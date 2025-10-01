@@ -286,3 +286,169 @@ export const GenerateGeneralGraphSchema = z.object({
 			"Entity detection: none (normal), detectEntities (detect entities and keywords), extractEntitiesOnly (only entities)"
 		),
 });
+
+export const GenerateOverlapGraphFromTextsSchema = z.object({
+	contexts: z
+		.array(
+			z.object({
+				text: z
+					.string()
+					.min(1, "Text is required for analysis")
+					.describe("Text that you'd like to analyze"),
+				modifyAnalyzedText: z
+					.enum(["none", "detectEntities", "extractEntitiesOnly"])
+					.default("none")
+					.describe(
+						"Entity detection: none (normal), detectEntities (detect entities and keywords), extractEntitiesOnly (only entities)"
+					),
+			})
+		)
+		.min(2, "At least two contexts are required")
+		.describe(
+			"Array of the texts to analyze and find overlaps for. Example: [text1, text2, ...]"
+		),
+	includeStatements: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include processed statements in response (add only if explicitly needed)"
+		),
+	includeGraph: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include full graph structure in response (add only if explicitly needed)"
+		),
+	addNodesAndEdges: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include nodes and edges in response (add only if explicitly needed, not recommended for longer texts)"
+		),
+});
+
+export const GenerateDifferenceGraphFromTextsSchema = z.object({
+	contexts: z
+		.array(
+			z.object({
+				text: z
+					.string()
+					.min(1, "Text is required for analysis")
+					.describe(
+						"Text content - First element is the target text to analyze for missing parts, subsequent elements are reference texts to identify what's missing"
+					),
+				modifyAnalyzedText: z
+					.enum(["none", "detectEntities", "extractEntitiesOnly"])
+					.default("none")
+					.describe(
+						"Entity detection: none (normal), detectEntities (detect entities and keywords), extractEntitiesOnly (only entities)"
+					),
+			})
+		)
+		.min(
+			2,
+			"At least two contexts are required - one target text and one reference text"
+		)
+		.describe(
+			"Array of texts where the FIRST text is analyzed for missing parts compared to the REMAINING reference texts. Example: [targetText, referenceText1, referenceText2, ...]"
+		),
+	includeStatements: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include processed statements in response (add only if explicitly needed)"
+		),
+	includeGraph: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include full graph structure in response (add only if explicitly needed)"
+		),
+	addNodesAndEdges: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include nodes and edges in response (add only if explicitly needed, not recommended for longer texts)"
+		),
+});
+
+export const GenerateGoogleSearchResultsGraphSchema = z.object({
+	queries: z
+		.array(z.string())
+		.min(1, "Queries are required for analysis")
+		.describe(
+			"Queries that you'd like to get Google search results for, can be comma-separated for multiple queries"
+		),
+	includeSearchResultsOnly: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Only include search results in the response (do not include the knowledge graph and keywords)"
+		),
+	showGraphOnly: z
+		.boolean()
+		.default(true)
+		.describe(
+			"Only include the graph structure and keywords in the response (do not include the search results)"
+		),
+	showExtendedGraphInfo: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include extended graph information in the response (add only if explicitly needed)"
+		),
+});
+
+export const GenerateGoogleSearchQueriesGraphSchema = z.object({
+	queries: z
+		.array(z.string())
+		.min(1, "Queries are required for analysis")
+		.describe(
+			"Queries that you'd like to get Google related queries for, can be comma-separated for multiple queries"
+		),
+	includeSearchQueriesOnly: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Only include search queries in the response (do not include the knowledge graph and keywords)"
+		),
+	keywordsSource: z
+		.enum(["related", "adwords"])
+		.default("related")
+		.describe(
+			"Source of keywords to use for the graph: related (Google suggestions) or adwords (Google Ads suggestions - broader range)"
+		),
+	showGraphOnly: z
+		.boolean()
+		.default(true)
+		.describe(
+			"Only include the graph structure and keywords in the response (do not include the search queries)"
+		),
+	showExtendedGraphInfo: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include extended graph information in the response (add only if explicitly needed)"
+		),
+});
+
+export const GenerateGoogleResultsVsQueriesGraphSchema = z.object({
+	queries: z
+		.array(z.string())
+		.min(1, "Queries are required for analysis")
+		.describe(
+			"Queries for which you'd like to find the difference between what people find and what people are looking for"
+		),
+	showGraphOnly: z
+		.boolean()
+		.default(true)
+		.describe(
+			"Only include the graph structure and keywords in the response (do not include the search results)"
+		),
+	showExtendedGraphInfo: z
+		.boolean()
+		.default(false)
+		.describe(
+			"Include extended graph information in the response (add only if explicitly needed)"
+		),
+});
