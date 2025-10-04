@@ -8,13 +8,15 @@ export async function makeInfraNodusRequest(
 		// Get config from global scope (set by Smithery)
 		const config = (global as any).infranodusConfig;
 
+		const requestBody = { ...body, modal: "mcp_server" };
+
 		const response = await fetch(`${config.apiBase}${endpoint}`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${config.apiKey}`,
 			},
-			body: JSON.stringify(body),
+			body: JSON.stringify(requestBody),
 		});
 
 		if (!response.ok) {
