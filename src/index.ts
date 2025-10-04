@@ -158,12 +158,12 @@ async function main() {
 	};
 
 	// Validate config
-	// if (!config.apiKey) {
-	// 	console.error(
-	// 		"ERROR: INFRANODUS_API_KEY is not set in environment variables"
-	// 	);
-	// 	process.exit(1);
-	// }
+	if (!config.apiKey) {
+		console.error(
+			"WARNING: Set INFRANODUS_API_KEY in environment variables to ensure you don't hit the rate limit"
+		);
+		// process.exit(1);
+	}
 
 	// Create server with config
 	const server = createServer({ config });

@@ -2,7 +2,7 @@ import { z } from "zod";
 
 // Define the configuration schema for Smithery
 export const configSchema = z.object({
-	apiKey: z.string().describe("Your InfraNodus API key"),
+	apiKey: z.string().optional().describe("Your InfraNodus API key"),
 	apiBase: z
 		.string()
 		.default("https://infranodus.com/api/v1")
