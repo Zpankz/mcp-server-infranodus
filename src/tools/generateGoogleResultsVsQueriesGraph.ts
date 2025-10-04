@@ -36,6 +36,8 @@ export const generateGoogleResultsVsQueriesGraphTool = {
 			const response = await makeInfraNodusRequest(endpoint, {
 				searchQuery: params.queries.join(","),
 				aiTopics: "true",
+				importLanguage: params.importLanguage || "EN",
+				importCountry: params.importCountry || "US",
 			});
 
 			if (response.error) {

@@ -4,7 +4,9 @@ export const GenerateGraphSchema = z.object({
 	text: z
 		.string()
 		.min(1, "Text is required for analysis")
-		.describe("Text that you'd like to analyze"),
+		.describe(
+			"Text that you'd like to analyze. Use new lines to separate separate statements or paragrams in each text (but not the sentences)."
+		),
 	includeStatements: z
 		.boolean()
 		.default(false)
@@ -39,7 +41,9 @@ export const CreateGraphSchema = z.object({
 	text: z
 		.string()
 		.min(1, "Text is required for analysis")
-		.describe("Text that you'd like to analyze"),
+		.describe(
+			"Text that you'd like to analyze. Use new lines to separate separate statements or paragrams in each text (but not the sentences)."
+		),
 	includeStatements: z
 		.boolean()
 		.default(false)
@@ -129,14 +133,18 @@ export const GenerateContentGapsSchema = z.object({
 	text: z
 		.string()
 		.min(1, "Text is required for analysis")
-		.describe("Text that you'd like to retrieve content gaps from"),
+		.describe(
+			"Text that you'd like to retrieve content gaps from. Use new lines to separate separate statements or paragrams in each text (but not the sentences)."
+		),
 });
 
 export const GenerateTextOverviewSchema = z.object({
 	text: z
 		.string()
 		.min(1, "Text is required for analysis")
-		.describe("Text that you'd like to get an overview of"),
+		.describe(
+			"Text that you'd like to get an overview of. Use new lines to separate separate statements or paragrams in each text (but not the sentences)."
+		),
 });
 
 export const GenerateTopicalClustersSchema = z.object({
@@ -144,7 +152,7 @@ export const GenerateTopicalClustersSchema = z.object({
 		.string()
 		.min(1, "Text is required for analysis")
 		.describe(
-			"Text that you'd like to retrieve topics and topical clusters from"
+			"Text that you'd like to retrieve topics and topical clusters from. Use new lines to separate separate statements or paragrams in each text (but not the sentences)."
 		),
 });
 
@@ -152,7 +160,9 @@ export const GenerateResearchQuestionsSchema = z.object({
 	text: z
 		.string()
 		.min(1, "Text is required for analysis")
-		.describe("Text that you'd like to generate research questions from"),
+		.describe(
+			"Text that you'd like to generate research questions from. Use new lines to separate separate statements or paragrams in each text (but not the sentences)."
+		),
 	useSeveralGaps: z
 		.boolean()
 		.default(false)
@@ -243,7 +253,9 @@ export const GenerateGeneralGraphSchema = z.object({
 	text: z
 		.string()
 		.min(1, "Text is required for analysis")
-		.describe("Text that you'd like to analyze"),
+		.describe(
+			"Text that you'd like to analyze. Use new lines to separate separate statements or paragrams in each text (but not the sentences)."
+		),
 	doNotSave: z
 		.boolean()
 		.default(true)
@@ -294,7 +306,9 @@ export const GenerateOverlapGraphFromTextsSchema = z.object({
 				text: z
 					.string()
 					.min(1, "Text is required for analysis")
-					.describe("Text that you'd like to analyze"),
+					.describe(
+						"Text that you'd like to analyze. Use new lines to separate separate statements or paragrams in each text (but not the sentences)."
+					),
 				modifyAnalyzedText: z
 					.enum(["none", "detectEntities", "extractEntitiesOnly"])
 					.default("none")
@@ -335,7 +349,7 @@ export const GenerateDifferenceGraphFromTextsSchema = z.object({
 					.string()
 					.min(1, "Text is required for analysis")
 					.describe(
-						"Text content - First element is the target text to analyze for missing parts, subsequent elements are reference texts to identify what's missing"
+						"Text content - First element is the target text to analyze for missing parts, subsequent elements are reference texts to identify what's missing. Use new lines to separate separate statements in each text (but not the sentences)."
 					),
 				modifyAnalyzedText: z
 					.enum(["none", "detectEntities", "extractEntitiesOnly"])
@@ -397,6 +411,42 @@ export const GenerateGoogleSearchResultsGraphSchema = z.object({
 		.describe(
 			"Include extended graph information in the response (add only if explicitly needed)"
 		),
+	importLanguage: z
+		.enum(["EN", "DE", "FR", "ES", "IT", "PT", "RU", "CN", "JP", "NL", "TW"])
+		.default("EN")
+		.describe(
+			"Language of the search queries, default is English (EN), use the language of the conversation or requested by user."
+		),
+	importCountry: z
+		.enum([
+			"AR",
+			"AU",
+			"BR",
+			"CA",
+			"CH",
+			"CN",
+			"DE",
+			"ES",
+			"FR",
+			"GB",
+			"HK",
+			"IN",
+			"IT",
+			"JP",
+			"MX",
+			"NL",
+			"NO",
+			"NZ",
+			"PT",
+			"RU",
+			"SV",
+			"TW",
+			"US",
+		])
+		.default("US")
+		.describe(
+			"Country of the search queries, default is United States (US).Use the country most suitable for the language selected."
+		),
 });
 
 export const GenerateGoogleSearchQueriesGraphSchema = z.object({
@@ -430,6 +480,42 @@ export const GenerateGoogleSearchQueriesGraphSchema = z.object({
 		.describe(
 			"Include extended graph information in the response (add only if explicitly needed)"
 		),
+	importLanguage: z
+		.enum(["EN", "DE", "FR", "ES", "IT", "PT", "RU", "CN", "JP", "NL", "TW"])
+		.default("EN")
+		.describe(
+			"Language of the search queries, default is English (EN), use the language of the conversation or requested by user."
+		),
+	importCountry: z
+		.enum([
+			"AR",
+			"AU",
+			"BR",
+			"CA",
+			"CH",
+			"CN",
+			"DE",
+			"ES",
+			"FR",
+			"GB",
+			"HK",
+			"IN",
+			"IT",
+			"JP",
+			"MX",
+			"NL",
+			"NO",
+			"NZ",
+			"PT",
+			"RU",
+			"SV",
+			"TW",
+			"US",
+		])
+		.default("US")
+		.describe(
+			"Country of the search queries, default is United States (US). Use the country most suitable for the language selected."
+		),
 });
 
 export const GenerateGoogleResultsVsQueriesGraphSchema = z.object({
@@ -450,5 +536,41 @@ export const GenerateGoogleResultsVsQueriesGraphSchema = z.object({
 		.default(false)
 		.describe(
 			"Include extended graph information in the response (add only if explicitly needed)"
+		),
+	importLanguage: z
+		.enum(["EN", "DE", "FR", "ES", "IT", "PT", "RU", "CN", "JP", "NL", "TW"])
+		.default("EN")
+		.describe(
+			"Language of the search queries, default is English (EN), use the language of the conversation or requested by user."
+		),
+	importCountry: z
+		.enum([
+			"AR",
+			"AU",
+			"BR",
+			"CA",
+			"CH",
+			"CN",
+			"DE",
+			"ES",
+			"FR",
+			"GB",
+			"HK",
+			"IN",
+			"IT",
+			"JP",
+			"MX",
+			"NL",
+			"NO",
+			"NZ",
+			"PT",
+			"RU",
+			"SV",
+			"TW",
+			"US",
+		])
+		.default("US")
+		.describe(
+			"Country of the search queries, default is United States (US). Use the country most suitable for the language selected."
 		),
 });

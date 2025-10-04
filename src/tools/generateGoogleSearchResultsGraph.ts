@@ -36,6 +36,8 @@ export const generateGoogleSearchResultsGraphTool = {
 				searchQuery: params.queries.join(","),
 				doNotAddGraph: params.includeSearchResultsOnly ? "true" : "false",
 				aiTopics: "true",
+				importLanguage: params.importLanguage || "EN",
+				importCountry: params.importCountry || "US",
 			});
 
 			if (response.error) {
