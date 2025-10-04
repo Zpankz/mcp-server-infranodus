@@ -39,6 +39,8 @@ export const generateGoogleSearchQueriesGraphTool = {
 				keywordsSource:
 					params.keywordsSource == "adwords" ? "adwords" : "related",
 				aiTopics: "true",
+				importLanguage: params.importLanguage || "EN",
+				importCountry: params.importCountry || "US",
 			});
 
 			if (response.error) {
