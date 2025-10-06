@@ -204,8 +204,8 @@ export interface FetchOutput {
 }
 
 export interface ToolHandlerContext {
-	server?: any; // MCP Server instance
 	progressToken?: string | number;
+	sendNotification?: (notification: any) => Promise<void>;
 	_meta?: {
 		progressTotal?: number;
 	};

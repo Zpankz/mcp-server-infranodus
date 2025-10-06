@@ -1,16 +1,15 @@
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { ToolHandlerContext } from "../types/index.js";
 
 /**
  * Helper class for reporting progress during tool execution
  */
 export class ProgressReporter {
-	private server?: Server;
+	private sendNotification?: (notification: any) => Promise<void>;
 	private progressToken?: string | number;
 	private total: number;
 
 	constructor(context: ToolHandlerContext, total: number = 100) {
-		this.server = context.server;
+		this.sendNotification = context.sendNotification;
 		this.progressToken = context.progressToken;
 		this.total = total;
 	}
@@ -21,14 +20,14 @@ export class ProgressReporter {
 	 * @param message Optional message to display
 	 */
 	async report(progress: number, message?: string): Promise<void> {
-		// If no server or progress token, skip notification
-		if (!this.server || this.progressToken === undefined) {
+		// If no send function or progress token, skip notification
+		if (!this.sendNotification || this.progressToken === undefined) {
 			return;
 		}
 
 		try {
 			// Send progress notification using MCP protocol
-			await this.server.notification({
+			await this.sendNotification({
 				method: "notifications/progress",
 				params: {
 					progressToken: this.progressToken,
@@ -50,6 +49,6 @@ export class ProgressReporter {
 	 * Check if progress reporting is available
 	 */
 	isAvailable(): boolean {
-		return !!(this.server && this.progressToken);
+		return !!(this.sendNotification && this.progressToken !== undefined);
 	}
 }

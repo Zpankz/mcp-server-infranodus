@@ -42,11 +42,9 @@ export default function createServer({
 	// Helper function to wrap tool handlers with server context
 	const wrapHandler = (handler: any) => {
 		return async (params: any, extra: any) => {
-			const progressToken = extra?._meta?.progressToken;
-			console.error(`[MCP Debug] Tool called. Has progressToken: ${progressToken !== undefined ? `YES (${progressToken})` : "NO"}`);
 			return handler(params, {
-				server: mcpServer.server,
-				progressToken,
+				progressToken: extra?._meta?.progressToken,
+				sendNotification: extra?.sendNotification,
 			});
 		};
 	};

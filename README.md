@@ -426,6 +426,7 @@ npm run build
 ## Resources
 
 - [InfraNodus Website](https://infranodus.com)
+- [InfraNodus MCP](https://infranodus.com/mcp)
 - [InfraNodus API Documentation](https://infranodus.com/api-access)
 - [MCP Protocol Documentation](https://modelcontextprotocol.io)
 - [Graph Theory Concepts](https://noduslabs.com/research/)
