@@ -151,18 +151,44 @@ Below we describe the two different ways to set up your InfraNodus MCP server.
 
 - If your client does not support Oauth, you can click the link \*Get the URL with keys instead\*\* which you can use to authenticate without Oauth.
 
-- In the end, either Smithery or you yourself will add something like this in your MCP configuration file:
+- In the end, if you use the URL with the keys, either Smithery or you yourself will add something like this in your MCP configuration file:
+
+#### For Cursor:
 
 ```json
-// e.g. for Cursor
+// e.g. Cursor will access directly the server via Smithery
 "mcpServers": {
     "mcp-server-infranodus": {
       "type": "http",
-      "url": "https://server.smithery.ai/@infranodus/mcp-server-infranodus/mcp?api_key=your_infranodus_api_key",
+      "url": "https://server.smithery.ai/@infranodus/mcp-server-infranodus/mcp?api_key=YOUR_SMITHERY_KEY&profile=YOUR_SMITHERY_PROFILE",
       "headers": {}
     }
   }
 ```
+
+### For Claude:
+
+```json
+// Claude uses a slightly different implementation
+// Fot this, it launches the MCP server on your local machine
+"mcpServers": {
+   "mcp-server-infranodus": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@smithery/cli@latest",
+				"run",
+				"@infranodus/mcp-server-infranodus",
+				"--key",
+				"YOUR_SMITHERY_KEY",
+				"--profile",
+				"YOUR_SMITHERY_PROFILE"
+			]
+		}
+  }
+```
+
+**Note**, in both cases, you'll automatically get the `YOUR_SMITHERY_KEY` and `YOUR_SMITHERY_PROFILE` values from Smithery when you copy the URL with credentials. These are not your InfraNodus API keys. You can use the InfraNodus API server without the API for the first 70 calls. Then you can add it to your Smithery profile and it will automatically connect to your account using the link above.
 
 4. **Use InfraNodus Tools in Your Calls**
 
@@ -223,6 +249,8 @@ Below we describe the two different ways to set up your InfraNodus MCP server.
    	}
    }
    ```
+
+**Note:** you can leave the `INFRANODUS_API_KEY` empty in which case you can make 70 free requests after which you will hit quota and will need to add your API key.
 
 3. Restart Claude Desktop to load the new server.
 
@@ -333,6 +361,44 @@ Identifies content gaps and missing connections in text.
 
 - `text` (string, required): The text to analyze for gaps
 
+## Progress Notifications
+
+For long-running operations (like SEO analysis), the MCP server supports **real-time progress notifications** that provide intermediary feedback to AI agents. This allows agents to:
+
+- Track the progress of multi-step operations
+- Display status messages to users
+- Understand what's happening during lengthy analyses
+
+### Implementation
+
+The server implements MCP progress notifications using:
+
+1. **ToolHandlerContext**: All tool handlers can receive an optional context parameter containing the server instance and progress token
+2. **ProgressReporter**: A utility class that simplifies sending progress updates with percentages and messages
+3. **Wrapped Handlers**: Tool registration automatically injects the server context into handlers
+
+### Example Usage in Tools
+
+```typescript
+import { ProgressReporter } from "../utils/progress.js";
+import { ToolHandlerContext } from "../types/index.js";
+
+handler: async (params: ParamType, context: ToolHandlerContext = {}) => {
+	const progress = new ProgressReporter(context);
+
+	await progress.report(25, "Fetching data from API...");
+	// Do work
+
+	await progress.report(75, "Analyzing results...");
+	// More work
+
+	await progress.report(100, "Complete!");
+	return results;
+};
+```
+
+The `generate_seo_report` tool demonstrates this pattern with 6 major progress checkpoints that provide detailed status updates throughout the multi-step analysis process.
+
 ## Troubleshooting
 
 ### Server doesn't appear in Claude
@@ -360,6 +426,7 @@ npm run build
 ## Resources
 
 - [InfraNodus Website](https://infranodus.com)
+- [InfraNodus MCP](https://infranodus.com/mcp)
 - [InfraNodus API Documentation](https://infranodus.com/api-access)
 - [MCP Protocol Documentation](https://modelcontextprotocol.io)
 - [Graph Theory Concepts](https://noduslabs.com/research/)

@@ -14,3 +14,4 @@ export { generateDifferenceGraphFromTextsTool } from "./generateDifferenceGraphF
 export { generateGoogleSearchResultsGraphTool } from "./generateGoogleSearchResultsGraph.js";
 export { generateGoogleSearchQueriesGraphTool } from "./generateGoogleSearchQueriesGraph.js";
 export { generateGoogleResultsVsQueriesGraphTool } from "./generateGoogleResultsVsQueriesGraph.js";
+export { generateSEOGraphTool } from "./generateSEOGraphTool.js";

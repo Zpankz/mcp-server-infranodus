@@ -10,6 +10,10 @@ import {
 	ResponsesOutput,
 	SearchOutput,
 	FetchOutput,
+	KeywordsOutput,
+	TopicNamesOutput,
+	SummaryOutput,
+	StatementStringsOutput,
 } from "../types/index.js";
 
 export function transformToStructuredOutput(
@@ -120,6 +124,90 @@ export function generateTopics(data: GraphResponse): TopicsOutput {
 	}
 
 	return topicalClusters;
+}
+
+export function generateSummaryFromTopicsAndGaps(
+	data: GraphResponse
+): SummaryOutput {
+	const summary: SummaryOutput = {};
+
+	if (
+		data.extendedGraphSummary?.mainTopics &&
+		data.extendedGraphSummary?.contentGaps
+	) {
+		summary.summary =
+			data.extendedGraphSummary.mainTopics.join("\n") +
+			"\n\n" +
+			data.extendedGraphSummary.contentGaps.join("\n");
+	}
+
+	return summary;
+}
+
+export function extractInsightsFromExtendedGraphSummary(
+	data: GraphResponse
+): InsightsOutput {
+	const mainTopics = data.extendedGraphSummary?.mainTopics || [];
+	const contentGaps = data.extendedGraphSummary?.contentGaps || [];
+	const mainConcepts = data.extendedGraphSummary?.mainConcepts || [];
+	const topKeywordCombinations = data.extendedGraphSummary?.topBigrams || [];
+	const conceptsToDevelop = data.extendedGraphSummary?.conceptualGateways || [];
+
+	return {
+		mainTopics,
+		contentGaps,
+		mainConcepts,
+		topKeywordCombinations,
+		conceptsToDevelop,
+	};
+}
+
+export function extractStatementStrings(
+	data: GraphResponse
+): StatementStringsOutput {
+	const statements: StatementStringsOutput = {};
+
+	if (data.statements) {
+		statements.statements = data.statements.map((statement) => {
+			const statementContent = statement.content;
+			const statementCategories =
+				statement.categories?.map((category) => category) || [];
+			return `${statementContent} ${statementCategories.join(", ")}`;
+		});
+	}
+
+	return statements;
+}
+
+export function generateKeywordsFromBigrams(
+	data: GraphResponse
+): KeywordsOutput {
+	const keywords: KeywordsOutput = {};
+
+	if (data.extendedGraphSummary?.topBigrams) {
+		keywords.keywords = data.extendedGraphSummary.topBigrams;
+	}
+
+	return keywords;
+}
+
+export function generateTopicNames(data: GraphResponse): TopicNamesOutput {
+	const topicNames: TopicNamesOutput = {};
+
+	if (
+		data.extendedGraphSummary?.mainTopicNames &&
+		Array.isArray(data.extendedGraphSummary.mainTopicNames)
+	) {
+		const mainTopicNames = data.extendedGraphSummary.mainTopicNames.map(
+			(topic) => {
+				const topicName = topic.split(". ") ? topic.split(". ")[1] : topic;
+				return topicName;
+			}
+		);
+		topicNames.topicNames = mainTopicNames;
+	}
+
+	return topicNames;
 }
 
 export function generateResearchQuestions(

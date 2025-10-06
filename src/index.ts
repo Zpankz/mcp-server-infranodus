@@ -19,6 +19,7 @@ import {
 	generateGoogleSearchResultsGraphTool,
 	generateGoogleSearchQueriesGraphTool,
 	generateGoogleResultsVsQueriesGraphTool,
+	generateSEOGraphTool,
 } from "./tools/index.js";
 import { aboutResource } from "./resources/about.js";
 import * as dotenv from "dotenv";
@@ -36,107 +37,123 @@ export default function createServer({
 	(global as any).infranodusConfig = config;
 
 	// Create MCP server
-	const server = new McpServer(serverInfo);
+	const mcpServer = new McpServer(serverInfo);
+
+	// Helper function to wrap tool handlers with server context
+	const wrapHandler = (handler: any) => {
+		return async (params: any, extra: any) => {
+			return handler(params, {
+				progressToken: extra?._meta?.progressToken,
+				sendNotification: extra?.sendNotification,
+			});
+		};
+	};
 
 	// Register tools
-	server.registerTool(
+	mcpServer.registerTool(
 		generateKnowledgeGraphTool.name,
 		generateKnowledgeGraphTool.definition,
-		generateKnowledgeGraphTool.handler
+		wrapHandler(generateKnowledgeGraphTool.handler)
 	);
 
-	server.registerTool(
+	mcpServer.registerTool(
 		createKnowledgeGraphTool.name,
 		createKnowledgeGraphTool.definition,
-		createKnowledgeGraphTool.handler
+		wrapHandler(createKnowledgeGraphTool.handler)
 	);
 
-	server.registerTool(
+	mcpServer.registerTool(
 		analyzeExistingGraphTool.name,
 		analyzeExistingGraphTool.definition,
-		analyzeExistingGraphTool.handler
+		wrapHandler(analyzeExistingGraphTool.handler)
 	);
 
-	server.registerTool(
+	mcpServer.registerTool(
 		generateContentGapsTool.name,
 		generateContentGapsTool.definition,
-		generateContentGapsTool.handler
+		wrapHandler(generateContentGapsTool.handler)
 	);
 
-	server.registerTool(
+	mcpServer.registerTool(
 		generateTopicalClustersTool.name,
 		generateTopicalClustersTool.definition,
-		generateTopicalClustersTool.handler
+		wrapHandler(generateTopicalClustersTool.handler)
 	);
 
-	server.registerTool(
+	mcpServer.registerTool(
 		generateResearchQuestionsTool.name,
 		generateResearchQuestionsTool.definition,
-		generateResearchQuestionsTool.handler
+		wrapHandler(generateResearchQuestionsTool.handler)
 	);
 
-	server.registerTool(
+	mcpServer.registerTool(
 		generateResearchQuestionsFromGraphTool.name,
 		generateResearchQuestionsFromGraphTool.definition,
-		generateResearchQuestionsFromGraphTool.handler
+		wrapHandler(generateResearchQuestionsFromGraphTool.handler)
 	);
 
-	server.registerTool(
+	mcpServer.registerTool(
 		generateResponsesFromGraphTool.name,
 		generateResponsesFromGraphTool.definition,
-		generateResponsesFromGraphTool.handler
+		wrapHandler(generateResponsesFromGraphTool.handler)
 	);
 
-	server.registerTool(
+	mcpServer.registerTool(
 		generateTextOverviewTool.name,
 		generateTextOverviewTool.definition,
-		generateTextOverviewTool.handler
+		wrapHandler(generateTextOverviewTool.handler)
 	);
 
-	server.registerTool(
+	mcpServer.registerTool(
 		generateOverlapGraphFromTextsTool.name,
 		generateOverlapGraphFromTextsTool.definition,
-		generateOverlapGraphFromTextsTool.handler
+		wrapHandler(generateOverlapGraphFromTextsTool.handler)
 	);
 
-	server.registerTool(
+	mcpServer.registerTool(
 		generateDifferenceGraphFromTextsTool.name,
 		generateDifferenceGraphFromTextsTool.definition,
-		generateDifferenceGraphFromTextsTool.handler
+		wrapHandler(generateDifferenceGraphFromTextsTool.handler)
 	);
 
-	server.registerTool(
+	mcpServer.registerTool(
 		generateGoogleSearchResultsGraphTool.name,
 		generateGoogleSearchResultsGraphTool.definition,
-		generateGoogleSearchResultsGraphTool.handler
+		wrapHandler(generateGoogleSearchResultsGraphTool.handler)
 	);
 
-	server.registerTool(
+	mcpServer.registerTool(
 		generateGoogleSearchQueriesGraphTool.name,
 		generateGoogleSearchQueriesGraphTool.definition,
-		generateGoogleSearchQueriesGraphTool.handler
+		wrapHandler(generateGoogleSearchQueriesGraphTool.handler)
 	);
 
-	server.registerTool(
+	mcpServer.registerTool(
 		generateGoogleResultsVsQueriesGraphTool.name,
 		generateGoogleResultsVsQueriesGraphTool.definition,
-		generateGoogleResultsVsQueriesGraphTool.handler
+		wrapHandler(generateGoogleResultsVsQueriesGraphTool.handler)
 	);
 
-	server.registerTool(
+	mcpServer.registerTool(
+		generateSEOGraphTool.name,
+		generateSEOGraphTool.definition,
+		wrapHandler(generateSEOGraphTool.handler)
+	);
+
+	mcpServer.registerTool(
 		searchExistingGraphsTool.name,
 		searchExistingGraphsTool.definition,
-		searchExistingGraphsTool.handler
+		wrapHandler(searchExistingGraphsTool.handler)
 	);
 
-	server.registerTool(
+	mcpServer.registerTool(
 		searchExistingGraphsFetchTool.name,
 		searchExistingGraphsFetchTool.definition,
-		searchExistingGraphsFetchTool.handler
+		wrapHandler(searchExistingGraphsFetchTool.handler)
 	);
 
 	// Register resources
-	server.registerResource(
+	mcpServer.registerResource(
 		aboutResource.name,
 		aboutResource.uri,
 		aboutResource.definition,
@@ -144,7 +161,7 @@ export default function createServer({
 	);
 
 	// Return the server instance
-	return server.server;
+	return mcpServer.server;
 }
 
 // Main function for STDIO compatibility (local development)
