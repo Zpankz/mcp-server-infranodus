@@ -37,16 +37,24 @@ export interface GraphGap {
 }
 
 export interface Statement {
-	id: number;
-	content: string;
-	contextId: number;
-	categories: string[];
-	createdAt: string;
-	sortId: number;
-	statementHashtags: string[];
-	statementCommunities: string[];
-	topStatementCommunity: string;
-	topStatementOfCommunity: string;
+	id?: number;
+	content?: string;
+	contextId?: number;
+	categories?: string[];
+	createdAt?: string;
+	sortId?: number;
+	statementHashtags?: string[];
+	statementCommunities?: string[];
+	topStatementCommunity?: string;
+	topStatementOfCommunity?: string;
+}
+
+export interface StatementsOutput {
+	statements?: Statement[];
+}
+
+export interface StatementStringsOutput {
+	statements?: string[];
 }
 
 export interface GraphResponse {
@@ -69,6 +77,7 @@ export interface GraphResponse {
 	extendedGraphSummary?: {
 		contentGaps?: string[];
 		mainTopics?: string[];
+		mainTopicNames?: string[];
 		mainConcepts?: string[];
 		conceptualGateways?: string[];
 		topRelations?: string[];
@@ -80,6 +89,18 @@ export interface GraphResponse {
 	isPublic?: boolean;
 	aiAdvice?: string[];
 	error?: string;
+}
+
+export interface SummaryOutput {
+	summary?: string;
+}
+
+export interface InsightsOutput {
+	contentGaps?: string[];
+	mainTopics?: string[];
+	mainConcepts?: string[];
+	conceptsToDevelop?: string[];
+	topKeywordCombinations?: string[];
 }
 
 export interface SearchResponse {
@@ -134,6 +155,14 @@ export interface GapsOutput {
 
 export interface TopicsOutput {
 	topicalClusters?: string[];
+}
+
+export interface KeywordsOutput {
+	keywords?: string[];
+}
+
+export interface TopicNamesOutput {
+	topicNames?: string[];
 }
 
 export interface GraphOverview {

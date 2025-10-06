@@ -19,6 +19,7 @@ import {
 	generateGoogleSearchResultsGraphTool,
 	generateGoogleSearchQueriesGraphTool,
 	generateGoogleResultsVsQueriesGraphTool,
+	generateSEOGraphTool,
 } from "./tools/index.js";
 import { aboutResource } from "./resources/about.js";
 import * as dotenv from "dotenv";
@@ -121,6 +122,12 @@ export default function createServer({
 		generateGoogleResultsVsQueriesGraphTool.name,
 		generateGoogleResultsVsQueriesGraphTool.definition,
 		generateGoogleResultsVsQueriesGraphTool.handler
+	);
+
+	server.registerTool(
+		generateSEOGraphTool.name,
+		generateSEOGraphTool.definition,
+		generateSEOGraphTool.handler
 	);
 
 	server.registerTool(

@@ -574,3 +574,48 @@ export const GenerateGoogleResultsVsQueriesGraphSchema = z.object({
 			"Country of the search queries, default is United States (US). Use the country most suitable for the language selected."
 		),
 });
+
+export const GenerateSEOGraphSchema = z.object({
+	text: z
+		.string()
+		.min(1, "Text is required for SEO analysis")
+		.describe(
+			"Content that you'd like to optimize for SEO. Use new lines to separate separate statements or paragrams in each text (but not the sentences)."
+		),
+	importLanguage: z
+		.enum(["EN", "DE", "FR", "ES", "IT", "PT", "RU", "CN", "JP", "NL", "TW"])
+		.default("EN")
+		.describe(
+			"Language of the content and search queries, default is English (EN), use the language of the conversation or requested by user."
+		),
+	importCountry: z
+		.enum([
+			"AR",
+			"AU",
+			"BR",
+			"CA",
+			"CH",
+			"CN",
+			"DE",
+			"ES",
+			"FR",
+			"GB",
+			"HK",
+			"IN",
+			"IT",
+			"JP",
+			"MX",
+			"NL",
+			"NO",
+			"NZ",
+			"PT",
+			"RU",
+			"SV",
+			"TW",
+			"US",
+		])
+		.default("US")
+		.describe(
+			"Country for the search analysis, default is United States (US). Use the country most suitable for the language selected."
+		),
+});
