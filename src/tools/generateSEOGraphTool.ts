@@ -17,9 +17,9 @@ interface SEOResults {
 }
 
 export const generateSEOGraphTool = {
-	name: "generate_seo_graph",
+	name: "generate_seo_report",
 	definition: {
-		title: "Generate SEO Analysis Graph",
+		title: "Generate SEO Analysis Report",
 		description:
 			"Analyze content for SEO optimization by comparing it with Google search results and search queries to identify content gaps and opportunities",
 		inputSchema: GenerateSEOGraphSchema.shape,
