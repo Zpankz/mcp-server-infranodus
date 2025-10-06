@@ -20,6 +20,7 @@ import {
 	generateGoogleSearchQueriesGraphTool,
 	generateGoogleResultsVsQueriesGraphTool,
 	generateSEOGraphTool,
+	developLatentConceptsTool,
 } from "./tools/index.js";
 import { aboutResource } from "./resources/about.js";
 import * as dotenv from "dotenv";
@@ -96,6 +97,12 @@ export default function createServer({
 		generateResponsesFromGraphTool.name,
 		generateResponsesFromGraphTool.definition,
 		wrapHandler(generateResponsesFromGraphTool.handler)
+	);
+
+	mcpServer.registerTool(
+		developLatentConceptsTool.name,
+		developLatentConceptsTool.definition,
+		wrapHandler(developLatentConceptsTool.handler)
 	);
 
 	mcpServer.registerTool(

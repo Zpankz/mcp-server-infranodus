@@ -25,15 +25,17 @@ Available Tools:
 5. generate_research_questions - Generate research questions based on content gaps
 6. generate_research_questions - Generate research questions based on an existing InfraNodus graph
 7. generate_responses_from_graph - Generate responses from an existing InfraNodus graph or ontology
-8. generate_text_overview - Generate a topical overview of a text and provide insights for LLMs to generate better responses
-9. create_knowledge_graph - Create a knowledge graph in InfraNodus from text and provide a link to it
-10. generate_overlap_graph - Create knowledge graphs from two or more texts and find the overlap (similarities) between them
-11. generate_difference_graph - Create knowledge graphs from two or more text and find what's not present in the first graph that's present in the others
-12. generate_google_search_graph - Generate a Google search results graph from search queries
-13. generate_search_queries_graph - Generate a graph of search requests related to search queries provided
-14. generate_search_results_vs_queries_graph - Find what people search for but don't yet find
-15. search - Search through existing InfraNodus graphs
-16. fetch - Fetch a specific search result for a graph
+8. develop_latent_concepts - Analyze text and develop latent ideas based on concepts that connect this text to a broader discourse
+9. generate_text_overview - Generate a topical overview of a text and provide insights for LLMs to generate better responses
+10. create_knowledge_graph - Create a knowledge graph in InfraNodus from text and provide a link to it
+11. generate_overlap_graph - Create knowledge graphs from two or more texts and find the overlap (similarities) between them
+12. generate_difference_graph - Create knowledge graphs from two or more text and find what's not present in the first graph that's present in the others
+13. generate_google_search_graph - Generate a Google search results graph from search queries
+14. generate_search_queries_graph - Generate a graph of search requests related to search queries provided
+15. generate_search_results_vs_queries_graph - Find what people search for but don't yet find
+16. generate_seo_report - Analyze content for SEO optimization by comparing it with Google search results and search queries
+17. search - Search through existing InfraNodus graphs
+18. fetch - Fetch a specific search result for a graph
 
 Key Features:
 - Topic modeling and clustering

@@ -79,9 +79,11 @@ export interface GraphResponse {
 		mainTopics?: string[];
 		mainTopicNames?: string[];
 		mainConcepts?: string[];
-		conceptualGateways?: string[];
 		topRelations?: string[];
 		topBigrams?: string[];
+		topicsToDevelop?: string[];
+		conceptualGateways?: string[];
+		conceptualGatewaysGraph?: string[];
 	};
 	userName?: string;
 	graphName?: string;
@@ -171,6 +173,12 @@ export interface GraphOverview {
 
 export interface ResearchQuestionsOutput {
 	questions?: string[];
+}
+
+export interface LatentConceptsOutput {
+	ideas?: string[];
+	latentConceptsToDevelop?: string[];
+	latentConceptsGraph?: any;
 }
 
 export interface ResponsesOutput {

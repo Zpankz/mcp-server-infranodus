@@ -15,3 +15,4 @@ export { generateGoogleSearchResultsGraphTool } from "./generateGoogleSearchResu
 export { generateGoogleSearchQueriesGraphTool } from "./generateGoogleSearchQueriesGraph.js";
 export { generateGoogleResultsVsQueriesGraphTool } from "./generateGoogleResultsVsQueriesGraph.js";
 export { generateSEOGraphTool } from "./generateSEOGraphTool.js";
+export { developLatentConceptsTool } from "./developLatentConcepts.js";

@@ -14,6 +14,7 @@ import {
 	TopicNamesOutput,
 	SummaryOutput,
 	StatementStringsOutput,
+	LatentConceptsOutput,
 } from "../types/index.js";
 
 export function transformToStructuredOutput(
@@ -220,6 +221,28 @@ export function generateResearchQuestions(
 	}
 
 	return researchQuestions;
+}
+
+export function extractLatentConceptsIdeas(
+	data: GraphResponse
+): LatentConceptsOutput {
+	const latentConcepts: LatentConceptsOutput = {};
+
+	if (data.aiAdvice) {
+		latentConcepts.ideas = data.aiAdvice;
+	}
+
+	if (data.extendedGraphSummary?.conceptualGateways) {
+		latentConcepts.latentConceptsToDevelop =
+			data.extendedGraphSummary.conceptualGateways;
+	}
+
+	if (data.extendedGraphSummary?.conceptualGatewaysGraph) {
+		latentConcepts.latentConceptsGraph =
+			data.extendedGraphSummary.conceptualGatewaysGraph;
+	}
+
+	return latentConcepts;
 }
 
 export function generateResponses(data: GraphResponse): ResponsesOutput {
