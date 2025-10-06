@@ -361,6 +361,44 @@ Identifies content gaps and missing connections in text.
 
 - `text` (string, required): The text to analyze for gaps
 
+## Progress Notifications
+
+For long-running operations (like SEO analysis), the MCP server supports **real-time progress notifications** that provide intermediary feedback to AI agents. This allows agents to:
+
+- Track the progress of multi-step operations
+- Display status messages to users
+- Understand what's happening during lengthy analyses
+
+### Implementation
+
+The server implements MCP progress notifications using:
+
+1. **ToolHandlerContext**: All tool handlers can receive an optional context parameter containing the server instance and progress token
+2. **ProgressReporter**: A utility class that simplifies sending progress updates with percentages and messages
+3. **Wrapped Handlers**: Tool registration automatically injects the server context into handlers
+
+### Example Usage in Tools
+
+```typescript
+import { ProgressReporter } from "../utils/progress.js";
+import { ToolHandlerContext } from "../types/index.js";
+
+handler: async (params: ParamType, context: ToolHandlerContext = {}) => {
+	const progress = new ProgressReporter(context);
+
+	await progress.report(25, "Fetching data from API...");
+	// Do work
+
+	await progress.report(75, "Analyzing results...");
+	// More work
+
+	await progress.report(100, "Complete!");
+	return results;
+};
+```
+
+The `generate_seo_report` tool demonstrates this pattern with 6 major progress checkpoints that provide detailed status updates throughout the multi-step analysis process.
+
 ## Troubleshooting
 
 ### Server doesn't appear in Claude

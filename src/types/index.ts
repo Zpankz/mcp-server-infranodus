@@ -202,3 +202,11 @@ export interface FetchOutput {
 	text: string;
 	url: string;
 }
+
+export interface ToolHandlerContext {
+	server?: any; // MCP Server instance
+	progressToken?: string | number;
+	_meta?: {
+		progressTotal?: number;
+	};
+}

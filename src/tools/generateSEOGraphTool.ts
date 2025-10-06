@@ -8,6 +8,8 @@ import {
 	extractInsightsFromExtendedGraphSummary,
 	extractStatementStrings,
 } from "../utils/transformers.js";
+import { ToolHandlerContext } from "../types/index.js";
+import { ProgressReporter } from "../utils/progress.js";
 
 interface SEOResults {
 	inSearchResultsNotInText: any;
@@ -24,9 +26,20 @@ export const generateSEOGraphTool = {
 			"Analyze content for SEO optimization by comparing it with Google search results and search queries to identify content gaps and opportunities",
 		inputSchema: GenerateSEOGraphSchema.shape,
 	},
-	handler: async (params: z.infer<typeof GenerateSEOGraphSchema>) => {
+	handler: async (
+		params: z.infer<typeof GenerateSEOGraphSchema>,
+		context: ToolHandlerContext = {}
+	) => {
 		try {
+			// Initialize progress reporter
+			const progress = new ProgressReporter(context);
+
 			// Step 1: Generate topical clusters from the original text
+			await progress.report(
+				5,
+				"🔍 Analyzing your text to identify main topics and keywords..."
+			);
+
 			const topicalClustersResponse = await makeInfraNodusRequest(
 				"/graphAndStatements?doNotSave=true&addStats=true&includeGraphSummary=false&extendedGraphSummary=true&includeGraph=false&includeStatements=false&aiTopics=true",
 				{
@@ -56,6 +69,11 @@ export const generateSEOGraphTool = {
 			];
 			const queries = [...new Set(combinedQueries)];
 
+			await progress.report(
+				15,
+				`📊 Identified ${queries.length} key search queries from your text`
+			);
+
 			if (queries.length === 0) {
 				return {
 					content: [
@@ -71,6 +89,13 @@ export const generateSEOGraphTool = {
 			}
 
 			// Step 2: Get Google search results for the main keywords
+			await progress.report(
+				25,
+				`🌐 Fetching Google search results for: ${queries
+					.slice(0, 2)
+					.join(", ")}${queries.length > 2 ? "..." : ""}`
+			);
+
 			const searchResultsResponse = await makeInfraNodusRequest(
 				"/import/googleSearchResultsGraph?doNotSave=true&addStats=true&includeGraphSummary=true&extendedGraphSummary=true&includeGraph=false&includeStatements=false&compactGraph=true&compactStatements=true&aiTopics=true",
 				{
@@ -95,6 +120,11 @@ export const generateSEOGraphTool = {
 
 			const searchResultsTopicsAndClusters = generateSummaryFromTopicsAndGaps(
 				searchResultsResponse
+			);
+
+			await progress.report(
+				40,
+				"🔎 Analyzing what people are searching for..."
 			);
 
 			// Step 3: Get Google search queries for the main keywords
@@ -125,6 +155,11 @@ export const generateSEOGraphTool = {
 				searchQueriesResponse
 			);
 
+			await progress.report(
+				55,
+				"📝 Comparing your content with top search results..."
+			);
+
 			// Step 4: Compare original text vs search results
 			const textVsSearchResultsResponse = await makeInfraNodusRequest(
 				"/graphsAndStatements?doNotSave=true&addStats=true&includeStatements=false&includeGraphSummary=false&extendedGraphSummary=true&includeGraph=false&compactGraph=true&compactStatements=true&aiTopics=true&compareMode=difference",
@@ -145,6 +180,11 @@ export const generateSEOGraphTool = {
 
 			const textVsSearchResultsInsights =
 				extractInsightsFromExtendedGraphSummary(textVsSearchResultsResponse);
+
+			await progress.report(
+				70,
+				"🎯 Comparing your content with the top search queries..."
+			);
 
 			// Step 5: Compare original text vs search queries
 			const textVsSearchQueriesResponse = await makeInfraNodusRequest(
@@ -167,6 +207,11 @@ export const generateSEOGraphTool = {
 			const textVsSearchQueriesInsights =
 				extractInsightsFromExtendedGraphSummary(textVsSearchQueriesResponse);
 
+			await progress.report(
+				85,
+				"💡 Finding what people search for but do not find..."
+			);
+
 			// Step 6: Compare search queries vs search results
 			const queriesVsResultsResponse = await makeInfraNodusRequest(
 				"/import/googleSearchVsIntentGraph?doNotSave=true&addStats=true&includeGraphSummary=false&extendedGraphSummary=true&includeGraph=false&includeStatements=true&compactGraph=true&compactStatements=true&aiTopics=true",
@@ -186,6 +231,11 @@ export const generateSEOGraphTool = {
 				queriesVsResultsResponse
 			);
 
+			await progress.report(
+				95,
+				"✅ Preparing comprehensive SEO analysis report..."
+			);
+
 			// Prepare the final results
 			const seoResults: SEOResults = {
 				inSearchResultsNotInText: textVsSearchResultsInsights,
@@ -193,6 +243,8 @@ export const generateSEOGraphTool = {
 				inSearchQueriesNotInResults: queriesVsResultsInsights,
 				topMissingQueries: topMissingQueries.statements,
 			};
+
+			await progress.report(100, "🎉 SEO analysis complete!");
 
 			return {
 				content: [
