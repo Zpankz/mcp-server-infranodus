@@ -81,56 +81,64 @@ InfraNodus MCP Server enables LLM workflows and AI assistants to analyze text us
    - Use any AI model (included in InfraNodus API)
    - Get actionable suggestions for content expansion
 
-10. **generate_text_overview**
+10. **develop_text_tool**
+
+- Comprehensive text analysis combining content gap ideas, latent topics, and conceptual bridges
+- Executes multiple analyses in sequence with progress tracking
+- Generates research ideas based on content gaps
+- Identifies latent topics and conceptual bridges to develop
+- Finds content gaps for deeper exploration
+
+11. **generate_text_overview**
 
 - Generate a topical overview of a text and provide insights for LLMs to generate better responses
 - Use it to get a high-level understanding of a text
 - Use it to augment prompts in your LLM workflows and AI assistants
 
-11. **create_knowledge_graph**
+12. **create_knowledge_graph**
 
 - Create a knowledge graph in InfraNodus from text and provide a link to it
 - Use it to create a knowledge graph in InfraNodus from text
 
-12. **overlap_between_texts**
+13. **overlap_between_texts**
 
 - Create knowledge graphs from two or more texts and find the overlap (similarities) between them
 - Use it to find similar topics and keywords across different texts
 
-13. **difference_between_texts**
+14. **difference_between_texts**
 
 - Compare knowledge graphs from two or more texts and find what's not present in the first graph that's present in the others
 - Use it to find how one text can be enriched with the others
 
-14. **analyze_google_search_results**
+15. **analyze_google_search_results**
 
 - Generate a graph with keywords and topics for Google search results for a certain query
 - Use it to understand the current informational supply (what people find)
 
-15. **analyze_related_search_queries**
+16. **analyze_related_search_queries**
 
 - Generate a graph from the search queries suggested by Google for a certain query
 - Use it to understand the current informational demand (what people are looking for)
 
-16. **search_queries_vs_search_results**
+17. **search_queries_vs_search_results**
 
 - Generate a graph of keyword combinations and topics people tend to search for that do not readily appear in the search results for the same queries
 - Use it to understand what people search for but don't yet find
 
-17. **generate_seo_report**
+18. **generate_seo_report**
 
 - Analyze content for SEO optimization by comparing it with Google search results and search queries
 - Identify content gaps and opportunities for better search visibility
 - Get comprehensive analysis of what's in search results but not in your text
 - Discover what people search for but don't find in current results
 
-18. **search**
+19. **search**
 
 - Search through existing InfraNodus graphs
 - Also use it to search through the public graphs of a specific user
 - Compatible with ChatGPT Deep Research mode via Developer Mode > Connectors
 
-19. **fetch**
+20. **fetch**
 
 - Fetch a specific search result for a graph
 - Can be used in ChatGPT Deep Research mode via Developer Mode > Connectors
