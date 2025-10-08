@@ -188,6 +188,38 @@ export const GenerateResearchQuestionsSchema = z.object({
 		),
 });
 
+export const GenerateResearchIdeasSchema = z.object({
+	text: z
+		.string()
+		.min(1, "Text is required for analysis")
+		.describe(
+			"Text that you'd like to generate research ideas from. Use new lines to separate separate statements or paragrams in each text (but not the sentences)."
+		),
+	useSeveralGaps: z
+		.boolean()
+		.default(false)
+		.describe("Generate ideas for several content gaps found in text"),
+	gapDepth: z
+		.number()
+		.default(0)
+		.describe("Depth of content gaps to generate ideas for"),
+	modelToUse: z
+		.enum([
+			"claude-opus-4.1",
+			"claude-sonnet-4",
+			"gemini-2.5-flash",
+			"gemini-2.5-flash-lite",
+			"gpt-4o",
+			"gpt-4o-mini",
+			"gpt-5",
+			"gpt-5-mini",
+		])
+		.default("gpt-4o")
+		.describe(
+			"AI model to use for generating research questions: claude-opus-4.1, claude-sonnet-4, gemini-2.5-flash, gemini-2.5-flash-lite, gpt-4o, gpt-4o-mini, gpt-5, gpt-5-mini"
+		),
+});
+
 export const DevelopLatentConceptsSchema = z.object({
 	text: z
 		.string()
