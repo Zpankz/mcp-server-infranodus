@@ -79,15 +79,20 @@ export interface GraphResponse {
 		mainTopics?: string[];
 		mainTopicNames?: string[];
 		mainConcepts?: string[];
-		conceptualGateways?: string[];
 		topRelations?: string[];
 		topBigrams?: string[];
+		topicsToDevelop?: string[];
+		conceptualGateways?: string[];
+		conceptualGatewaysGraph?: string[];
 	};
 	userName?: string;
 	graphName?: string;
 	graphUrl?: string;
 	isPublic?: boolean;
-	aiAdvice?: string[];
+	aiAdvice?: {
+		text: string;
+		finish_reason?: string;
+	}[];
 	error?: string;
 }
 
@@ -171,6 +176,18 @@ export interface GraphOverview {
 
 export interface ResearchQuestionsOutput {
 	questions?: string[];
+}
+
+export interface LatentConceptsOutput {
+	ideas?: string[];
+	latentConceptsToDevelop?: string[];
+	latentConceptsRelations?: string[];
+}
+
+export interface LatentTopicsOutput {
+	ideas?: string[];
+	mainTopics?: string[];
+	latentTopicsToDevelop?: string[];
 }
 
 export interface ResponsesOutput {

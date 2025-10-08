@@ -1,46 +1,42 @@
 import { z } from "zod";
-import { GenerateResearchQuestionsFromGraphSchema } from "../schemas/index.js";
+import { DevelopLatentConceptsSchema } from "../schemas/index.js";
 import { makeInfraNodusRequest } from "../api/client.js";
-import { generateResearchQuestions } from "../utils/transformers.js";
+import { extractLatentTopicsIdeas } from "../utils/transformers.js";
 
-export const generateResearchQuestionsFromGraphTool = {
-	name: "research_questions_from_graph",
+export const developLatentTopicsTool = {
+	name: "develop_latent_topics",
 	definition: {
-		title: "Generate Research Questions from an Existing InfraNodus Graph",
+		title: "Develop Latent Topics in Text",
 		description:
-			"Retrieve an existing InfraNodus knowledge graph and generate research questions based on the content gaps identified between the topical clusters inside the graph",
-		inputSchema: GenerateResearchQuestionsFromGraphSchema.shape,
+			"Analyze text, extract underdeveloped topics and get an idea on how to develop them",
+		inputSchema: DevelopLatentConceptsSchema.shape,
 	},
-	handler: async (
-		params: z.infer<typeof GenerateResearchQuestionsFromGraphSchema>
-	) => {
+	handler: async (params: z.infer<typeof DevelopLatentConceptsSchema>) => {
 		try {
 			// Build query parameters
 			const queryParams = new URLSearchParams({
 				doNotSave: "true",
 				addStats: "true",
-				optimize: "gap",
+				optimize: "latent",
 				includeStatements: "false",
 				includeGraphSummary: "false",
-				extendedGraphSummary: "false",
+				extendedGraphSummary: "true",
 				includeGraph: "false",
 				aiTopics: "true",
-				extendedAdvice: params.useSeveralGaps ? "true" : "false",
-				gapDepth: params.gapDepth ? params.gapDepth.toString() : "0",
 			});
 
 			const endpoint = `/graphAndAdvice?${queryParams.toString()}`;
 
 			const requestBody: any = {
-				name: params.graphName,
+				text: params.text,
 				aiTopics: "true",
 				requestMode: "question",
-				modelToUse: params.modelToUse,
+				modelToUse: params.modelToUse ? params.modelToUse : "gpt-4o",
 			};
 
 			const response = await makeInfraNodusRequest(endpoint, requestBody);
 
-			const researchQuestions = generateResearchQuestions(response);
+			const latentConceptsIdeas = extractLatentTopicsIdeas(response);
 
 			if (response.error) {
 				return {
@@ -58,7 +54,7 @@ export const generateResearchQuestionsFromGraphTool = {
 				content: [
 					{
 						type: "text" as const,
-						text: JSON.stringify(researchQuestions, null, 2),
+						text: JSON.stringify(latentConceptsIdeas, null, 2),
 					},
 				],
 			};

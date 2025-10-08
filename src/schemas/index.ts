@@ -188,6 +188,30 @@ export const GenerateResearchQuestionsSchema = z.object({
 		),
 });
 
+export const DevelopLatentConceptsSchema = z.object({
+	text: z
+		.string()
+		.min(1, "Text is required for analysis")
+		.describe(
+			"Text that you'd like to develop based on the latent concepts that connect this text to a broader discourse. Use new lines to separate separate statements or paragrams in each text (but not the sentences)."
+		),
+	modelToUse: z
+		.enum([
+			"claude-opus-4.1",
+			"claude-sonnet-4",
+			"gemini-2.5-flash",
+			"gemini-2.5-flash-lite",
+			"gpt-4o",
+			"gpt-4o-mini",
+			"gpt-5",
+			"gpt-5-mini",
+		])
+		.default("gpt-4o")
+		.describe(
+			"AI model to use for generating research questions: claude-opus-4.1, claude-sonnet-4, gemini-2.5-flash, gemini-2.5-flash-lite, gpt-4o, gpt-4o-mini, gpt-5, gpt-5-mini"
+		),
+});
+
 export const GenerateResearchQuestionsFromGraphSchema = z.object({
 	graphName: z
 		.string()
@@ -617,5 +641,37 @@ export const GenerateSEOGraphSchema = z.object({
 		.default("US")
 		.describe(
 			"Country for the search analysis, default is United States (US). Use the country most suitable for the language selected."
+		),
+});
+
+export const DevelopTextToolSchema = z.object({
+	text: z
+		.string()
+		.min(1, "Text is required for analysis")
+		.describe(
+			"Text that you'd like to think about and analyze. Use new lines to separate separate statements or paragrams in each text (but not the sentences)."
+		),
+	useSeveralGaps: z
+		.boolean()
+		.default(false)
+		.describe("Generate questions for several content gaps found in text"),
+	gapDepth: z
+		.number()
+		.default(0)
+		.describe("Depth of content gaps to generate questions for"),
+	modelToUse: z
+		.enum([
+			"claude-opus-4.1",
+			"claude-sonnet-4",
+			"gemini-2.5-flash",
+			"gemini-2.5-flash-lite",
+			"gpt-4o",
+			"gpt-4o-mini",
+			"gpt-5",
+			"gpt-5-mini",
+		])
+		.default("gpt-4o")
+		.describe(
+			"AI model to use for generating insights: claude-opus-4.1, claude-sonnet-4, gemini-2.5-flash, gemini-2.5-flash-lite, gpt-4o, gpt-4o-mini, gpt-5, gpt-5-mini"
 		),
 });

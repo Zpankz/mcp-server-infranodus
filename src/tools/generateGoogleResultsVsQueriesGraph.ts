@@ -4,9 +4,9 @@ import { makeInfraNodusRequest } from "../api/client.js";
 import { transformToStructuredOutput } from "../utils/transformers.js";
 
 export const generateGoogleResultsVsQueriesGraphTool = {
-	name: "generate_search_results_vs_queries_graph",
+	name: "search_queries_vs_search_results",
 	definition: {
-		title: "Generate a Graph of Search Results vs Search Queries",
+		title: "Generate a Knowledge Graph of Search Queries vs Search Results",
 		description:
 			"Find the combinations of keywords and topics people search for that don't appear in the search results for the same queries",
 		inputSchema: GenerateGoogleResultsVsQueriesGraphSchema.shape,

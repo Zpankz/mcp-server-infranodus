@@ -4,11 +4,11 @@ import { makeInfraNodusRequest } from "../api/client.js";
 import { transformToStructuredOutput } from "../utils/transformers.js";
 
 export const generateOverlapGraphFromTextsTool = {
-	name: "generate_overlap_graph",
+	name: "overlap_between_texts",
 	definition: {
-		title: "Generate Overlap Graph from Texts",
+		title: "Generate Overlap Knowledge Graph from Texts",
 		description:
-			"Extract the common relationships between texts and generate an overlap graph",
+			"Extract the common relationships and similarities between texts and generate an overlap graph",
 		inputSchema: GenerateOverlapGraphFromTextsSchema.shape,
 	},
 	handler: async (

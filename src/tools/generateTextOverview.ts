@@ -8,7 +8,7 @@ export const generateTextOverviewTool = {
 	definition: {
 		title: "Generate an Overview of a Text",
 		description:
-			"Generate a topical overview of a text and provide insights for LLMs to generate better responses",
+			"Generate a topical overview of a text based on its knowledge base and topical structure and provide insights for LLMs to generate better responses",
 		inputSchema: GenerateTextOverviewSchema.shape,
 	},
 	handler: async (params: z.infer<typeof GenerateTextOverviewSchema>) => {

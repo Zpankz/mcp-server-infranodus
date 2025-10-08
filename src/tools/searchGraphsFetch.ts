@@ -7,7 +7,8 @@ export const searchExistingGraphsFetchTool = {
 	name: "fetch",
 	definition: {
 		title: "Fetch a Search Result",
-		description: "Fetch a specific search result for a graph",
+		description:
+			"Fetch a specific search result for an InfraNodus knowledge graph",
 		inputSchema: SearchExistingGraphsFetchSchema.shape,
 	},
 	handler: async (params: z.infer<typeof SearchExistingGraphsFetchSchema>) => {

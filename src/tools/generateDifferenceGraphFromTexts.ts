@@ -4,11 +4,11 @@ import { makeInfraNodusRequest } from "../api/client.js";
 import { transformToStructuredOutput } from "../utils/transformers.js";
 
 export const generateDifferenceGraphFromTextsTool = {
-	name: "generate_difference_graph",
+	name: "difference_between_texts",
 	definition: {
-		title: "Generate Difference Graph from Texts",
+		title: "Generate Difference Knowledge Graph from Texts",
 		description:
-			"Extract the relations that are not in the first text but are in the other texts",
+			"Extract the conceptial relations that are not present in the first text but are in the other texts",
 		inputSchema: GenerateDifferenceGraphFromTextsSchema.shape,
 	},
 	handler: async (

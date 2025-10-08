@@ -4,10 +4,11 @@ import { makeInfraNodusRequest } from "../api/client.js";
 import { transformToStructuredOutput } from "../utils/transformers.js";
 
 export const generateGoogleSearchResultsGraphTool = {
-	name: "generate_google_search_graph",
+	name: "analyze_google_search_results",
 	definition: {
-		title: "Generate a Google Search Results Graph",
-		description: "Generate a Google search results graph from search queries",
+		title: "Analyze the Main Topics in Google Search Results ",
+		description:
+			"Generate a knowledge graph and topical clusters from Google search results for provided search queries",
 		inputSchema: GenerateGoogleSearchResultsGraphSchema.shape,
 	},
 	handler: async (
