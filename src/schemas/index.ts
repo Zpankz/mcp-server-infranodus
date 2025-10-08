@@ -29,7 +29,7 @@ export const GenerateGraphSchema = z.object({
 		.enum(["none", "detectEntities", "extractEntitiesOnly"])
 		.default("none")
 		.describe(
-			"Entity detection: none (normal), detectEntities (detect entities and keywords), extractEntitiesOnly (only entities) - use for ontology creation and entity extraction"
+			"Entity detection: none (normal), detectEntities (mix entities and words), extractEntitiesOnly (detect entities only - use for ontology creation and entity extraction)"
 		),
 });
 
@@ -66,7 +66,7 @@ export const CreateGraphSchema = z.object({
 		.enum(["none", "detectEntities", "extractEntitiesOnly"])
 		.default("none")
 		.describe(
-			"Entity detection: none (normal), detectEntities (detect entities and keywords), extractEntitiesOnly (only entities) - use for ontology creation and entity extraction"
+			"Entity detection: none (normal), detectEntities (mix entities and words), extractEntitiesOnly (detect entities only - use for ontology creation and entity extraction)"
 		),
 });
 
@@ -103,7 +103,7 @@ export const AnalyzeExistingGraphSchema = z.object({
 		.enum(["none", "detectEntities", "extractEntitiesOnly"])
 		.default("none")
 		.describe(
-			"Entity detection: none (normal), detectEntities (detect entities and keywords), extractEntitiesOnly (only entities) - use for ontology creation and entity extraction"
+			"Entity detection: none (normal), detectEntities (mix entities and words), extractEntitiesOnly (detect entities only - use for ontology creation and entity extraction)"
 		),
 });
 
@@ -351,7 +351,7 @@ export const GenerateGeneralGraphSchema = z.object({
 		.enum(["none", "detectEntities", "extractEntitiesOnly"])
 		.default("none")
 		.describe(
-			"Entity detection: none (normal), detectEntities (detect entities and keywords), extractEntitiesOnly (only entities) - use for ontology creation and entity extraction"
+			"Entity detection: none (normal), detectEntities (mix entities and words), extractEntitiesOnly (detect entities only - use for ontology creation and entity extraction)"
 		),
 });
 
@@ -369,7 +369,7 @@ export const GenerateOverlapGraphFromTextsSchema = z.object({
 					.enum(["none", "detectEntities", "extractEntitiesOnly"])
 					.default("none")
 					.describe(
-						"Entity detection: none (normal), detectEntities (detect entities and keywords), extractEntitiesOnly (only entities) - use for ontology creation and entity extraction"
+						"Entity detection: none (normal), detectEntities (mix entities and words), extractEntitiesOnly (detect entities only - use for ontology creation and entity extraction)"
 					),
 			})
 		)
@@ -411,7 +411,7 @@ export const GenerateDifferenceGraphFromTextsSchema = z.object({
 					.enum(["none", "detectEntities", "extractEntitiesOnly"])
 					.default("none")
 					.describe(
-						"Entity detection: none (normal), detectEntities (detect entities and keywords), extractEntitiesOnly (only entities) - use for ontology creation and entity extraction"
+						"Entity detection: none (normal), detectEntities (mix entities and words), extractEntitiesOnly (detect entities only - use for ontology creation and entity extraction)"
 					),
 			})
 		)

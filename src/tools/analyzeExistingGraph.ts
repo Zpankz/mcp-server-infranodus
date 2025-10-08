@@ -15,13 +15,17 @@ export const analyzeExistingGraphTool = {
 		try {
 			const includeNodesAndEdges = params.addNodesAndEdges;
 			const includeGraph = params.includeGraph;
+			const buildingEntitiesGraph =
+				params.modifyAnalyzedText == "extractEntitiesOnly" ? true : false;
 			const queryParams = new URLSearchParams({
 				doNotSave: "true",
 				addStats: "true",
-				includeStatements: params.includeStatements.toString(),
-				includeGraphSummary: params.includeGraphSummary.toString(),
+				includeStatements: params.includeStatements ? "true" : "false",
+				includeGraphSummary: params.includeGraphSummary ? "true" : "false",
 				extendedGraphSummary: "true",
-				includeGraph: includeGraph ? "true" : "false",
+				includeGraph: includeGraph || buildingEntitiesGraph ? "true" : "false",
+				compactGraph: includeGraph || buildingEntitiesGraph ? "true" : "false",
+				compactStatements: params.includeStatements ? "true" : "false",
 				aiTopics: "true",
 				optimize: "develop",
 			});
@@ -50,7 +54,8 @@ export const analyzeExistingGraphTool = {
 			const structuredOutput = transformToStructuredOutput(
 				response,
 				includeGraph,
-				includeNodesAndEdges
+				includeNodesAndEdges,
+				buildingEntitiesGraph
 			);
 
 			return {

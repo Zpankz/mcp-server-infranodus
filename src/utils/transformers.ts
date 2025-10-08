@@ -22,7 +22,8 @@ import {
 export function transformToStructuredOutput(
 	data: GraphResponse,
 	includeGraph: boolean = false,
-	includeNodesAndEdges: boolean = false
+	includeNodesAndEdges: boolean = false,
+	buildingEntitiesGraph: boolean = false
 ): KnowledgeGraphOutput {
 	const output: KnowledgeGraphOutput = {
 		statistics: {
@@ -63,7 +64,9 @@ export function transformToStructuredOutput(
 		}
 
 		if (graph.attributes?.top_clusters) {
-			output.topClusters = graph.attributes.top_clusters;
+			if (!buildingEntitiesGraph) {
+				output.topClusters = graph.attributes.top_clusters;
+			}
 			delete graph.attributes.top_clusters;
 		}
 

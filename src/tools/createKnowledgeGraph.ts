@@ -15,14 +15,18 @@ export const createKnowledgeGraphTool = {
 		try {
 			const includeNodesAndEdges = params.addNodesAndEdges;
 			const includeGraph = params.includeGraph;
+			const buildingEntitiesGraph =
+				params.modifyAnalyzedText == "extractEntitiesOnly" ? true : false;
 			// Build query parameters
 			const queryParams = new URLSearchParams({
 				doNotSave: "false",
 				addStats: "true",
-				includeStatements: params.includeStatements.toString(),
+				includeStatements: params.includeStatements ? "true" : "false",
 				includeGraphSummary: "false",
 				extendedGraphSummary: "true",
-				includeGraph: includeGraph ? "true" : "false",
+				includeGraph: includeGraph || buildingEntitiesGraph ? "true" : "false",
+				compactGraph: includeGraph || buildingEntitiesGraph ? "true" : "false",
+				compactStatements: params.includeStatements ? "true" : "false",
 				aiTopics: "true",
 				optimize: "develop",
 			});
@@ -56,7 +60,8 @@ export const createKnowledgeGraphTool = {
 			const structuredOutput = transformToStructuredOutput(
 				response,
 				includeGraph,
-				includeNodesAndEdges
+				includeNodesAndEdges,
+				buildingEntitiesGraph
 			);
 
 			return {
