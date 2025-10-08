@@ -67,63 +67,70 @@ InfraNodus MCP Server enables LLM workflows and AI assistants to analyze text us
    - Use any AI model (included in InfraNodus API)
    - Use any prompt
 
-8. **develop_latent_concepts**
+8. **develop_conceptual_bridges**
 
    - Analyze text and develop latent ideas based on concepts that connect this text to a broader discourse
    - Discover hidden themes and patterns that link your text to wider contexts
    - Use any AI model (included in InfraNodus API)
-   - Generate insights that go beyond surface-level analysis
+   - Generate insights that help develop the discourse
 
-9. **generate_text_overview**
+9. **develop_latent_topics**
 
-   - Generate a topical overview of a text and provide insights for LLMs to generate better responses
-   - Use it to get a high-level understanding of a text
-   - Use it to augment prompts in your LLM workflows and AI assistants
+   - Analyze text and extract underdeveloped topics with ideas on how to develop them
+   - Identify topics that need more attention and elaboration
+   - Use any AI model (included in InfraNodus API)
+   - Get actionable suggestions for content expansion
 
-10. **create_knowledge_graph**
+10. **generate_text_overview**
+
+- Generate a topical overview of a text and provide insights for LLMs to generate better responses
+- Use it to get a high-level understanding of a text
+- Use it to augment prompts in your LLM workflows and AI assistants
+
+11. **create_knowledge_graph**
 
 - Create a knowledge graph in InfraNodus from text and provide a link to it
 - Use it to create a knowledge graph in InfraNodus from text
 
-11. **generate_overlap_graph**
+12. **generate_overlap_graph**
 
 - Create knowledge graphs from two or more texts and find the overlap (similarities) between them
 - Use it to find similar topics and keywords across different texts
 
-12. **generate_difference_graph**
+13. **generate_difference_graph**
 
 - Compare knowledge graphs from two or more texts and find what's not present in the first graph that's present in the others
 - Use it to find how one text can be enriched with the others
 
-13. **generate_google_search_graph**
+14. **generate_google_search_graph**
 
 - Generate a graph with keywords and topics for Google search results for a certain query
 - Use it to understand the current informational supply (what people find)
 
-14. **generate_search_queries_graph**
+15. **generate_search_queries_graph**
 
 - Generate a graph from the search queries suggested by Google for a certain query
 - Use it to understand the current informational demand (what people are looking for)
 
-15. **generate_search_results_vs_queries_graph**
+16. **generate_search_results_vs_queries_graph**
 
 - Generate a graph of keyword combinations and topics people tend to search for that do not readily appear in the search results for the same queries
 - Use it to understand what people search for but don't yet find
 
-16. **generate_seo_report**
+17. **generate_seo_report**
 
 - Analyze content for SEO optimization by comparing it with Google search results and search queries
 - Identify content gaps and opportunities for better search visibility
 - Get comprehensive analysis of what's in search results but not in your text
 - Discover what people search for but don't find in current results
 
-17. **search**
+18. **search**
 
 - Search through existing InfraNodus graphs
 - Also use it to search through the public graphs of a specific user
 - Compatible with ChatGPT Deep Research mode via Developer Mode > Connectors
 
-18. **fetch**
+19. **fetch**
 
 - Fetch a specific search result for a graph
 - Can be used in ChatGPT Deep Research mode via Developer Mode > Connectors

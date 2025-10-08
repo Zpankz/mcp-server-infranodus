@@ -89,7 +89,10 @@ export interface GraphResponse {
 	graphName?: string;
 	graphUrl?: string;
 	isPublic?: boolean;
-	aiAdvice?: string[];
+	aiAdvice?: {
+		text: string;
+		finish_reason?: string;
+	}[];
 	error?: string;
 }
 
@@ -178,7 +181,13 @@ export interface ResearchQuestionsOutput {
 export interface LatentConceptsOutput {
 	ideas?: string[];
 	latentConceptsToDevelop?: string[];
-	latentConceptsGraph?: any;
+	latentConceptsRelations?: string[];
+}
+
+export interface LatentTopicsOutput {
+	ideas?: string[];
+	mainTopics?: string[];
+	latentTopicsToDevelop?: string[];
 }
 
 export interface ResponsesOutput {

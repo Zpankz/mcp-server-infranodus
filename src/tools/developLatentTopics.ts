@@ -1,14 +1,14 @@
 import { z } from "zod";
 import { DevelopLatentConceptsSchema } from "../schemas/index.js";
 import { makeInfraNodusRequest } from "../api/client.js";
-import { extractLatentConceptsIdeas } from "../utils/transformers.js";
+import { extractLatentTopicsIdeas } from "../utils/transformers.js";
 
-export const developLatentConceptsTool = {
-	name: "develop_latent_concepts",
+export const developLatentTopicsTool = {
+	name: "develop_latent_topics",
 	definition: {
-		title: "Develop Latent Concepts from Text",
+		title: "Develop Latent Topics in Text",
 		description:
-			"Analyze text and develop latent ideas based on the concepts that connect this text to a broader discourse",
+			"Analyze text, extract underdeveloped topics and get an idea on how to develop them",
 		inputSchema: DevelopLatentConceptsSchema.shape,
 	},
 	handler: async (params: z.infer<typeof DevelopLatentConceptsSchema>) => {
@@ -36,7 +36,7 @@ export const developLatentConceptsTool = {
 
 			const response = await makeInfraNodusRequest(endpoint, requestBody);
 
-			const latentConceptsIdeas = extractLatentConceptsIdeas(response);
+			const latentConceptsIdeas = extractLatentTopicsIdeas(response);
 
 			if (response.error) {
 				return {
