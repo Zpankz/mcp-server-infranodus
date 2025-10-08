@@ -23,7 +23,7 @@ export const generateSEOGraphTool = {
 	definition: {
 		title: "Generate SEO Analysis Report",
 		description:
-			"Analyze content for SEO optimization by comparing it with Google search results and search queries to identify content gaps and opportunities",
+			"Analyze content for SEO optimization by comparing its knowledge graph with the graphs of Google search results and search queries to identify content gaps and opportunities based on the differences",
 		inputSchema: GenerateSEOGraphSchema.shape,
 	},
 	handler: async (

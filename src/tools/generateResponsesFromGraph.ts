@@ -8,7 +8,7 @@ export const generateResponsesFromGraphTool = {
 	definition: {
 		title: "Generate Responses and Expert Advice from an InfraNodus Graph",
 		description:
-			"Retrieve an InfraNodus graph and generate responses and expert advice based on a prompt provided",
+			"Retrieve an existing InfraNodus knowledge graph and use the relations extracted to generate responses and expert advice based on a prompt provided",
 		inputSchema: GenerateResponsesFromGraphSchema.shape,
 	},
 	handler: async (params: z.infer<typeof GenerateResponsesFromGraphSchema>) => {

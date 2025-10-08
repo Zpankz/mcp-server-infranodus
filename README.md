@@ -53,7 +53,7 @@ InfraNodus MCP Server enables LLM workflows and AI assistants to analyze text us
    - Use any AI model (included in InfraNodus API)
    - Content gaps are identified based on topical clustering
 
-6. **generate_research_questions**
+6. **research_questions_from_graph**
 
    - Generate research questions based on an existing InfraNodus graph
    - Use them as prompts in your LLM models
@@ -92,27 +92,27 @@ InfraNodus MCP Server enables LLM workflows and AI assistants to analyze text us
 - Create a knowledge graph in InfraNodus from text and provide a link to it
 - Use it to create a knowledge graph in InfraNodus from text
 
-12. **generate_overlap_graph**
+12. **overlap_between_texts**
 
 - Create knowledge graphs from two or more texts and find the overlap (similarities) between them
 - Use it to find similar topics and keywords across different texts
 
-13. **generate_difference_graph**
+13. **difference_between_texts**
 
 - Compare knowledge graphs from two or more texts and find what's not present in the first graph that's present in the others
 - Use it to find how one text can be enriched with the others
 
-14. **generate_google_search_graph**
+14. **analyze_google_search_results**
 
 - Generate a graph with keywords and topics for Google search results for a certain query
 - Use it to understand the current informational supply (what people find)
 
-15. **generate_search_queries_graph**
+15. **analyze_related_search_queries**
 
 - Generate a graph from the search queries suggested by Google for a certain query
 - Use it to understand the current informational demand (what people are looking for)
 
-16. **generate_search_results_vs_queries_graph**
+16. **search_queries_vs_search_results**
 
 - Generate a graph of keyword combinations and topics people tend to search for that do not readily appear in the search results for the same queries
 - Use it to understand what people search for but don't yet find

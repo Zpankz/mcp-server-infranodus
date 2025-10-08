@@ -8,7 +8,7 @@ export const generateKnowledgeGraphTool = {
 	definition: {
 		title: "Generate Knowledge Graph from Text",
 		description:
-			"Analyze text and generate a knowledge graph with topics, concepts, and structural gaps",
+			"Analyze text and generate a knowledge graph with main topics, topical clusters, concepts, concepts relations and structural gaps",
 		inputSchema: GenerateGraphSchema.shape,
 	},
 	handler: async (params: z.infer<typeof GenerateGraphSchema>) => {

@@ -4,11 +4,11 @@ import { makeInfraNodusRequest } from "../api/client.js";
 import { generateResearchQuestions } from "../utils/transformers.js";
 
 export const generateResearchQuestionsFromGraphTool = {
-	name: "generate_research_questions_from_graph",
+	name: "research_questions_from_graph",
 	definition: {
-		title: "Generate Research Questions from an InfraNodus Graph",
+		title: "Generate Research Questions from an Existing InfraNodus Graph",
 		description:
-			"Retrieve an InfraNodus graph and generate research questions based on the content gaps identified",
+			"Retrieve an existing InfraNodus knowledge graph and generate research questions based on the content gaps identified between the topical clusters inside the graph",
 		inputSchema: GenerateResearchQuestionsFromGraphSchema.shape,
 	},
 	handler: async (
