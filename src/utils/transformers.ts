@@ -14,6 +14,8 @@ import {
 	TopicNamesOutput,
 	SummaryOutput,
 	StatementStringsOutput,
+	LatentConceptsOutput,
+	LatentTopicsOutput,
 } from "../types/index.js";
 
 export function transformToStructuredOutput(
@@ -216,17 +218,60 @@ export function generateResearchQuestions(
 	const researchQuestions: ResearchQuestionsOutput = {};
 
 	if (data.aiAdvice) {
-		researchQuestions.questions = data.aiAdvice;
+		researchQuestions.questions = data.aiAdvice.map((advice) => advice.text);
 	}
 
 	return researchQuestions;
+}
+
+export function extractLatentConceptsIdeas(
+	data: GraphResponse
+): LatentConceptsOutput {
+	const latentConcepts: LatentConceptsOutput = {};
+
+	if (data.aiAdvice) {
+		latentConcepts.ideas = data.aiAdvice.map((advice) => advice.text);
+	}
+
+	if (data.extendedGraphSummary?.conceptualGateways) {
+		latentConcepts.latentConceptsToDevelop =
+			data.extendedGraphSummary.conceptualGateways;
+	}
+
+	if (data.extendedGraphSummary?.conceptualGatewaysGraph) {
+		latentConcepts.latentConceptsRelations =
+			data.extendedGraphSummary.conceptualGatewaysGraph;
+	}
+
+	return latentConcepts;
+}
+
+export function extractLatentTopicsIdeas(
+	data: GraphResponse
+): LatentTopicsOutput {
+	const latentConcepts: LatentTopicsOutput = {};
+
+	if (data.aiAdvice) {
+		latentConcepts.ideas = data.aiAdvice.map((advice) => advice.text);
+	}
+
+	if (data.extendedGraphSummary?.mainTopics) {
+		latentConcepts.mainTopics = data.extendedGraphSummary.mainTopics;
+	}
+
+	if (data.extendedGraphSummary?.topicsToDevelop) {
+		latentConcepts.latentTopicsToDevelop =
+			data.extendedGraphSummary.topicsToDevelop;
+	}
+
+	return latentConcepts;
 }
 
 export function generateResponses(data: GraphResponse): ResponsesOutput {
 	const responses: ResponsesOutput = {};
 
 	if (data.aiAdvice) {
-		responses.responses = data.aiAdvice;
+		responses.responses = data.aiAdvice.map((advice) => advice.text);
 	}
 
 	return responses;
