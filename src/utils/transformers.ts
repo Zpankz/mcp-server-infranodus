@@ -224,6 +224,16 @@ export function generateResearchQuestions(
 	return researchQuestions;
 }
 
+export function generateResponses(data: GraphResponse): ResponsesOutput {
+	const responses: ResponsesOutput = {};
+
+	if (data.aiAdvice) {
+		responses.responses = data.aiAdvice.map((advice) => advice.text);
+	}
+
+	return responses;
+}
+
 export function extractLatentConceptsIdeas(
 	data: GraphResponse
 ): LatentConceptsOutput {
@@ -265,16 +275,6 @@ export function extractLatentTopicsIdeas(
 	}
 
 	return latentConcepts;
-}
-
-export function generateResponses(data: GraphResponse): ResponsesOutput {
-	const responses: ResponsesOutput = {};
-
-	if (data.aiAdvice) {
-		responses.responses = data.aiAdvice.map((advice) => advice.text);
-	}
-
-	return responses;
 }
 
 export function generateSearchResult(

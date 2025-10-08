@@ -8,7 +8,7 @@ export const generateResearchQuestionsTool = {
 	definition: {
 		title: "Generate Research Questions from Text",
 		description:
-			"Analyze text and generate innovative research questions based on the content gaps identified between the topical clusters inside the text",
+			"Analyze text and generate innovative research questions based on the content gaps identified between the topical clusters inside the text that can be used to improve the text and the discourse it relates to",
 		inputSchema: GenerateResearchQuestionsSchema.shape,
 	},
 	handler: async (params: z.infer<typeof GenerateResearchQuestionsSchema>) => {
