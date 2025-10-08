@@ -245,8 +245,10 @@ Below we describe the two different ways to set up your InfraNodus MCP server.
    git clone https://github.com/yourusername/mcp-server-infranodus.git
    cd mcp-server-infranodus
    npm install
-   npm run build
+   npm run build:inspect
    ```
+
+Note that `build:inspect` will generate the `dist/index.js` file which you will then use in your server setup. The standard `npm run build` command will only build a Smithery file.
 
 2. **Set up your API key:**
 

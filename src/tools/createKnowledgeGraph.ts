@@ -8,7 +8,7 @@ export const createKnowledgeGraphTool = {
 	definition: {
 		title: "Create a Knowledge Graph in InfraNodus from Text",
 		description:
-			"Create a knowledge graph in InfraNodus from text and provide a link to it",
+			"Create a knowledge graph in InfraNodus from text, save it, and provide its name and a link to it for future use. ",
 		inputSchema: CreateGraphSchema.shape,
 	},
 	handler: async (params: z.infer<typeof CreateGraphSchema>) => {

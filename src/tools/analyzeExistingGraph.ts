@@ -6,9 +6,9 @@ import { transformToStructuredOutput } from "../utils/transformers.js";
 export const analyzeExistingGraphTool = {
 	name: "analyze_existing_graph_by_name",
 	definition: {
-		title: "Analyze Existing InfraNodus Graph",
+		title: "Analyze or Extract an Existing InfraNodus Graph",
 		description:
-			"Retrieve and analyze an existing graph from your InfraNodus account",
+			"Extract and analyze an existing graph from your InfraNodus account",
 		inputSchema: AnalyzeExistingGraphSchema.shape,
 	},
 	handler: async (params: z.infer<typeof AnalyzeExistingGraphSchema>) => {
