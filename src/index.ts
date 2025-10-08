@@ -22,6 +22,7 @@ import {
 	generateSEOGraphTool,
 	developConceptualBridgesTool,
 	developLatentTopicsTool,
+	developTextTool,
 } from "./tools/index.js";
 import { aboutResource } from "./resources/about.js";
 import * as dotenv from "dotenv";
@@ -110,6 +111,12 @@ export default function createServer({
 		developLatentTopicsTool.name,
 		developLatentTopicsTool.definition,
 		wrapHandler(developLatentTopicsTool.handler)
+	);
+
+	mcpServer.registerTool(
+		developTextTool.name,
+		developTextTool.definition,
+		wrapHandler(developTextTool.handler)
 	);
 
 	mcpServer.registerTool(

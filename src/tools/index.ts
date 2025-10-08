@@ -17,3 +17,4 @@ export { generateGoogleResultsVsQueriesGraphTool } from "./generateGoogleResults
 export { generateSEOGraphTool } from "./generateSEOGraphTool.js";
 export { developConceptualBridgesTool } from "./developConceptualBridges.js";
 export { developLatentTopicsTool } from "./developLatentTopics.js";
+export { developTextTool } from "./developTextTool.js";
